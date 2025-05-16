@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h2>Myntra</h2>
+        <ul>
+          <li><a href="/" class="">Home</a></li>
+          <li><a href="/mens" class="active">Mens</a></li>
+          <li><a href="/womens" class="">Womens</a></li>
+          <li><a href="/kids" class="">Kids</a></li>
+          <li><a href="/login" class="">Log in</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h1>Sign up page</h1>
+        <div class="login">
+          <form action="/signup" method="post">
+            <p>
+              <label for="username">Username</label><br />
+              <input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="ex. JOHNDOE"
+              />
+            </p>
+            <p>
+              <label for="name">Name</label><br />
+              <input type="text" name="name" id="name" />
+            </p>
+            <p>
+              <label for="address">Address</label><br />
+              <textarea name="address" id="address" rows="7"></textarea>
+            </p>
+            <p>
+              <label for="phone">Phone</label><br />
+              <input type="text" name="phone" id="phone" />
+            </p>
+            <p>
+              <label for="email">Email ID</label><br />
+              <input type="email" name="email" id="email" />
+            </p>
+            <p>
+              <label for="password">Password</label><br />
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="ex. XXXXXXX123"
+              />
+            </p>
+            <p>
+              <button type="submit">Sign up</button>
+              <button type="reset">Cancel</button>
+            </p>
+          </form>
+        </div>
+        <div>
+          <h4>OR</h4>
+          <p>already registered? <a href="/login">Log in</a></p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

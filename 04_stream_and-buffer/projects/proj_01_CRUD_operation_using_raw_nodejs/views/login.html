@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>log In</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h2>Myntra</h2>
+        <ul>
+          <li><a href="/" class="">Home</a></li>
+          <li><a href="/mens" class="active">Mens</a></li>
+          <li><a href="/womens" class="">Womens</a></li>
+          <li><a href="/kids" class="">Kids</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h1>Log in page</h1>
+        <div class="login">
+          <form action="/login" method="post">
+            <p>
+              <label for="username">Username</label><br />
+              <input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="ex. JOHNDOE"
+              />
+            </p>
+            <p>
+              <label for="password">Password</label><br />
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="ex. XXXXXXX123"
+              />
+            </p>
+            <p>
+              <button type="submit">Log in</button>
+              <button type="reset">Cancel</button>
+            </p>
+          </form>
+        </div>
+        <div>
+          <h4>OR</h4>
+          <p>not yet registered? <a href="/signup">Sign up</a></p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

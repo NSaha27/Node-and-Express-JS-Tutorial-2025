@@ -1,0 +1,2 @@
+username=ARNABROY&name=Arnab+Roy&address=Kalyani%2C+Bardhaman%2C+723013&phone=9831532144&email=arnab.roy24%40gmail.com&password=%40rnabRoy12345
+username=TISTADUTTA&name=Tista+Dutta&address=Serampore&phone=9163531961&email=tista.dutta07%40gmail.com&password=TistaDutta07

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Account</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h2>Myntra</h2>
+        <ul>
+          <li><a href="/" class="">Home</a></li>
+          <li><a href="/mens" class="active">Mens</a></li>
+          <li><a href="/womens" class="">Womens</a></li>
+          <li><a href="/kids" class="">Kids</a></li>
+          <li><a href="/logout" class="">log Out</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h1>Customer account</h1>
+        <div class="update-form">
+          <form action="/update-customer-account" method="post">
+            <p>
+              <label for="username">Username</label><br />
+              <input
+                type="text"
+                name="username"
+                id="username"
+                value="${customer.username}"
+                readonly
+              />
+            </p>
+            <p>
+              <label for="name">Name</label><br />
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value="${customer.name}"
+              />
+            </p>
+            <p>
+              <label for="address">Address</label><br />
+              <textarea
+                name="address"
+                id="address"
+                rows="7"
+                value="${customer.address}"
+              ></textarea>
+            </p>
+            <p>
+              <label for="phone">Phone</label><br />
+              <input
+                type="text"
+                name="phone"
+                id="phone"
+                value="${customer.phone}"
+              />
+            </p>
+            <p>
+              <label for="email">Email ID</label><br />
+              <input
+                type="email"
+                name="email"
+                id="email"
+                value="${customer.email}"
+              />
+            </p>
+            <p>
+              <label for="password">Password</label><br />
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value="${customer.password}"
+              />
+            </p>
+            <p>
+              <button type="submit">Update</button>
+              <button type="reset">Cancel</button>
+            </p>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
