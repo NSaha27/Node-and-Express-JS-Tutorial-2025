@@ -1,0 +1,23 @@
+{
+  "name": "creating_a_basic_http_server",
+  "version": "1.0.0",
+  "description": "this program will create an http server and print first line on running the server to port 3000",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NSaha27/Node_and_Express_JS_tutorial_2025.git"
+  },
+  "author": "Niladri Saha",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/NSaha27/Node_and_Express_JS_tutorial_2025/issues"
+  },
+  "homepage": "https://github.com/NSaha27/Node_and_Express_JS_tutorial_2025#readme",
+  "type": "module",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}

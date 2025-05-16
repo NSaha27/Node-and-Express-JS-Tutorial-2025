@@ -1,0 +1,18 @@
+{
+  "name": "third_handling_routes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.17",
+    "dotenv": "^16.4.7",
+    "tailwindcss": "^4.0.17"
+  }
+}

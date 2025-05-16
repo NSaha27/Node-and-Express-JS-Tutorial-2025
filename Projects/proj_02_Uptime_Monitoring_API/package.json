@@ -1,0 +1,19 @@
+{
+  "name": "proj_02_uptime_monitoring_api",
+  "version": "1.0.0",
+  "description": "This API will monitor the uptime of links created by users. If a link becomes down or live, the user who has created that link will be notified via sms. This will be a REST API project using vanilla node js.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_ENV=staging nodemon index.js",
+    "start": "NODE_ENV=production node index.js"
+  },
+  "author": "Niladri Saha",
+  "license": "GPL-3.0",
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  }
+}

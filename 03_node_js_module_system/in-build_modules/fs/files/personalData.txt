@@ -1,0 +1,6 @@
+NAME=Niladri Saha
+GENDER=Male
+DOB=17/09/1992
+ADDRESS=Kolkata
+PHONE=+918240520433
+EMAIL=sahaniladri25@gmail.com

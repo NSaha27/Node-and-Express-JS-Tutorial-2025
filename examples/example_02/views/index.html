@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <h1>Use of createReadStream and createWriteStream with pipe method</h1>
+      <hr>
+    </header>
+    <main>
+      <section border="1">
+        <h2>Add Product Details</h2>
+        <p>
+          <form action="/" method="post">
+            <p>
+              <label for="prodID">Product ID</label> <br>
+              <input type="text" name="prodID" id="prodID">
+            </p>
+            <p>
+              <label for="prodName">Product Name</label> <br>
+              <input type="text" name="prodName" id="prodName">
+            </p>
+            <p>
+              <label for="prodCategory">Product Category</label> <br>
+              <select name="prodCategory" id="prodCategory">
+                <option value="" selected disabled>choose one...</option>
+                <option value="mens t-shirt">mens t-shirt</option>
+                <option value="womens t-shirt">womens t-shirt</option>
+                <option value="mens shirt">mens shirt</option>
+                <option value="womens shirt">womens shirt</option>
+                <option value="mens jeans">mens jeans</option>
+                <option value="womens jeans">womens jeans</option>
+                <option value="mens trousers">mens trousers</option>
+                <option value="womens trousers">womens trousers</option>
+                <option value="womens lagings">womens lagings</option>
+                <option value="socks">socks</option>
+              </select>
+            </p>
+            <p>
+              <label for="prodPurchaseFrom">Purchase From</label> <br>
+              <input type="text" name="prodPurchaseFrom" id="prodPurchaseFrom">
+            </p>
+            <p>
+              <label for="prodPrice">Price</label> <br>
+              <input type="text" name="prodPrice" id="prodPrice">
+            </p>
+            <p>
+              <button type="submit" class="btn btn-success">Save</button>
+              <button type="reset" class="btn btn-danger">Cancel</button>
+            </p>
+          </form>
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
