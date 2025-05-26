@@ -1,0 +1,73 @@
+<%- include("./header.ejs") %>
+<%- include("./navbar.ejs") %>
+    <li class="nav-item"><a href="/host/account" class="nav-link">Account</a></li>
+    <li class="nav-item"><a href="/host/logout" class="nav-link">Log out</a></li>
+  </ul>
+</nav>
+<main class="">
+  <section class="sec" id="sec1">
+    <h1 class="page-title"><%= pageTitle %></h1>
+    <div class="add-accomodation">
+      <form action="/host/add-accomodation" method="post">
+        <div class="form-group">
+          <label for="accName" class="form-label">Accomodation Name</label> <br>
+          <input type="text" name="accName" id="accName" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="accAddress" class="form-label">Accomodation Address</label> <br>
+          <textarea name="accAddress" id="accAddress" rows="8"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="amenities" class="form-label">Amenities</label> <br>
+          <iframe src="#" frameborder="0">
+            <ul class="form-control">
+              <li><h4>Bathroom</h4></li>
+              <li>Hair dryer</li>
+              <li>Cleaning products</li>
+              <li>Variable shampoo</li>
+              <li>Variable conditioner</li>
+              <li>Body soap</li>
+              <li>Hot water</li>
+              <li>Shower gel</li>
+              <li><h4>Bedroom & Laundry</h4></li>
+              <li>Hangers</li>
+              <li>Extra Pillows and Blankets</li>
+              <li>Iron</li>
+              <li>Clothes storage</li>
+              <li><h4>Heating & Cooling</h4></li>
+              <li>Portable fans</li>
+              <li>Heating</li>
+              <li><h4>Privacy & Safety</h4></li>
+              <li>Lock on bedroom doors</li>
+              <li>Exterior security cameras on property</li>
+              <li>Smoke alarm</li>
+              <li>Carbon monoxide alarm</li>
+              <li>First aid kit</li>
+              <li><h4>Internet and Office</h4></li>
+              <li>Wifi</li>
+              <li><h4>Kitchen and Dining</h4></li>
+              <li>Dishes and cutlery</li>
+              <li>Mini fridge</li>
+              <li>Kettle</li>
+              <li>Coffee maker</li>
+              <li><h4>Location features</h4></li>
+              <li>Launderette nearby</li>
+              <li><h4>Parking and facilities</h4></li>
+              <li>Free on-street parking</li>
+              <li><h4>Services</h4></li>
+              <li>Luggage drop-off allowed</li>
+              <li>Host greets you</li>
+              <li><h4>Not included</h4></li>
+              <li>TV</li>
+              <li>Washing machine</li>
+              <li>Dryer</li>
+              <li>Air conditioning</li>
+            </ul>
+          </iframe>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<%- include("./footer.ejs") %>
