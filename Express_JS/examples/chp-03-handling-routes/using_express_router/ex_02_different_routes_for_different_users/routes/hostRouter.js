@@ -67,4 +67,4 @@ hostRouter.post("/add-accomodation", (req, res, next) => {
   }
 })
 
-export default router;
+export default hostRouter;

@@ -1,7 +1,8 @@
 <%- include("./header.ejs") %>
 <%- include("./navbar.ejs") %>
     <li class="nav-item"><a href="/accomodation" class="nav-link">Accomodations</a></li>
-    <li class="nav-item"><a href="<% if(userType === 'user'){ %>/register<% }else{ %>/host-register<% } %>" class="nav-link">Register/Log In</a></li>
+    <li class="nav-item"><a href="/host/register" class="nav-link">Want to be a host?</a></li>
+    <li class="nav-item"><a href="/register" class="nav-link">Register/Log In</a></li>
   </ul>
 </nav>
 <main class="main">
@@ -9,7 +10,7 @@
     <h1 class="page-title"><%= pageTitle %></h1>
     <div class="registration">
       <h4>Enter the follwing details -</h4>
-      <form action="<% if(userType === 'user'){ %>/login<% }else{ %>/host-login<% } %>" method="post">
+      <form action="<% if(userType === 'user'){ %>/login<% }else{ %>/host/login<% } %>" method="post">
         <div class="form-group">
           <label for="username" class="form-label">Username</label> <br>
           <input type="text" name="username" id="username" class="form-control" placeholder="enter your username">
@@ -27,7 +28,7 @@
     <div>
       <h4>OR</h4>
       <p>
-        not yet registered? register <a href="<% if(userType === 'user'){ %>/register<% }else{ %>/host-register<% } %>">here</a>
+        not yet registered? register <a href="<% if(userType === 'user'){ %>/register<% }else{ %>/host/register<% } %>">here</a>
       </p>
     </div>
   </section>
