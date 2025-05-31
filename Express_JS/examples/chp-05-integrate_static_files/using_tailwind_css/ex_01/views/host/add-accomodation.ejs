@@ -1,0 +1,123 @@
+<%- include("../header.ejs") %>
+<%- include("../navbar.ejs") %>
+    <li class="nav-item"><a href="/host/account" class="nav-link nav-link decoration-0 block py-2 px-6 text-white font-bold hover:bg-white hover:text-purple-500">Account</a></li>
+    <li class="nav-item"><a href="/host/logout" class="nav-link nav-link decoration-0 block py-2 px-6 text-white font-bold hover:bg-white hover:text-purple-500">Log out</a></li>
+  </ul>
+</nav>
+<main class=""main w-full p-8">
+  <section class="sec w-full min-h-screen p-4 flex flex-col items-center" id="sec1">
+    <h1 class="page-title text-center text-3xl font-bold text-purple-500"><%= pageTitle %></h1>
+    <div class="add-accomodation">
+      <form action="/host/add-accomodation" method="post">
+        <div class="form-group">
+          <label for="accName" class="form-label">Accomodation Name</label> <br>
+          <input type="text" name="accName" id="accName" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="accAddress" class="form-label">Location</label> <br>
+          <textarea name="accAddress" id="accAddress" rows="8"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="amenities" class="form-label">Amenities</label> <br>
+          <div class="form-control">
+            <h4>Bathroom</h4>
+            <ul>
+              <li><span>Hair dryer</span> <input type="checkbox" name="amenities" id="" value="Hair dryer"> </li>
+              <li><span>Cleaning products</span> <input type="checkbox" name="amenities" id="" value="Cleaning products"> </li>
+              <li><span>Variable shampoo</span> <input type="checkbox" name="amenities" id="" value="Variable shampoo"> </li>
+              <li><span>Variable conditioner</span> <input type="checkbox" name="amenities" id="" value="Variable conditioner"> </li>
+              <li><span>Body soap</span> <input type="checkbox" name="amenities" id="" value="Body soap"> </li>
+              <li><span>Hot water</span> <input type="checkbox" name="amenities" id="" value="Hot water"> </li>
+              <li><span>Shower gel</span> <input type="checkbox" name="amenities" id="" value="Shower gel"> </li>
+            </ul>
+          </div>
+          <div class="form-control">
+            <h4>Bedroom & Laundry</h4>
+            <ul>
+              <li><span>Hangers</span> <input type="checkbox" name="amenities" id="" value="Hangers"> </li>
+              <li><span>Extra Pillows and Blankets</span> <input type="checkbox" name="amenities" id="" value="Extra Pillows and Blankets"> </li>
+              <li><span>Iron</span> <input type="checkbox" name="amenities" id="" value="Iron"> </li>
+              <li><span>Clothes storage</span> <input type="checkbox" name="amenities" id="" value="Clothes storage"> </li>
+            </ul>
+          </div>
+          <div class="form-control">
+            <h4>Heating & Cooling</h4>
+            <ul>
+              <li><span>Portable fans</span> <input type="checkbox" name="amenities" id="" value="Portable fans"> </li>
+              <li><span>Heating</span> <input type="checkbox" name="amenities" id="" value="Heating"> </li>
+            </ul>
+          </div>
+          <div class="form-control">
+            <h4>Privacy & Safety</h4>
+            <ul>
+              <li><span>Lock on bedroom doors</span> <input type="checkbox" name="amenities" id="" value="Lock on bedroom doors"> </li>
+              <li><span>Exterior security cameras on property</span> <input type="checkbox" name="amenities" id="" value="Exterior security cameras on property"> </li>
+              <li><span>Smoke alarm</span> <input type="checkbox" name="amenities" id="" value="Smoke alarm"> </li>
+              <li><span>Carbon monoxide alarm</span> <input type="checkbox" name="amenities" id="" value="Carbon monoxide alarm"> </li>
+              <li><span>First aid kit</span> <input type="checkbox" name="amenities" id="" value="First aid kit"> </li>
+            </ul>
+          </div>
+          <div class="form-control">
+            <h4>Internet and Office</h4>
+            <ul>
+              <li><span>Wifi</span> <input type="checkbox" name="amenities" id="" value="Wifi"> </li>
+            </ul>
+          </div>
+          <div class="form-control">
+            <h4>Kitchen and Dining</h4>
+            <li><span>Dishes and cutlery</span> <input type="checkbox" name="amenities" id="" value="Dishes and cutlery"> </li>
+            <li><span>Mini fridge</span> <input type="checkbox" name="amenities" id="" value="Mini fridge"> </li>
+            <li><span>Kettle</span> <input type="checkbox" name="amenities" id="" value="Kettle"> </li>
+            <li><span>Coffee maker</span> <input type="checkbox" name="amenities" id="" value="Coffee maker"> </li>
+          </div>
+          <div class="form-control">
+            <h4>Location features</h4>
+            <ul>
+              <li><span>Launderette nearby</span> <input type="checkbox" name="amenities" id="" value="Launderette nearby"> </li>
+            </ul>
+          </div>
+          <div class="form-control">
+            <h4>Parking and facilities</h4>
+            <ul>
+              <li><span>Free on-street parking</span> <input type="checkbox" name="amenities" id="" value="Free on-street parking"> </li>
+            </ul>
+          </div>
+          <div class="form-control">
+            <h4>Services</h4>
+            <ul>
+              <li><span>Luggage drop-off allowed</span> <input type="checkbox" name="amenities" id="" value="Luggage drop-off allowed"> </li>
+              <li><span>Host greets you</span> <input type="checkbox" name="amenities" id="" value="Host greets you"> </li>
+            </ul>
+          </div>
+          <div class="form-control">
+            <h4>Not included</h4>
+            <ul>
+              <li><span><strike>TV</strike></span> <input type="checkbox" name="amenities" id="" value="TV" disabled> </li>
+              <li><span><strike>Washing machine</strike></span> <input type="checkbox" name="amenities" id="" value="Washing machine" disabled> </li>
+              <li><span><strike>Dryer</strike></span> <input type="checkbox" name="amenities" id="" value="Dryer" disabled> </li>
+              <li><span><strike>Air conditioning</strike></span> <input type="checkbox" name="amenities" id="" value="Air conditioning" disabled> </li>
+            </ul>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="rent" class="form-label">Rent (per night upto 3 persons)</label> <br>
+          <input type="number" name="rent" id="rent" min="0" step="0.01">
+        </div>
+        <div class="form-group">
+          <label for="contact-number" class="form-label">Contact Number (Business)</label> <br>
+          <input type="text" name="contact-number" id="contact-number" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="contact-email" class="form-label">Contact Email ID (Business)</label> <br>
+          <input type="email" name="contact-email" id="contact-email" class="form-control">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Add</button>
+          <button type="reset" class="btn btn-danger">Reset</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<%- include("../footer.ejs") %>
