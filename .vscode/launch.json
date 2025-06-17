@@ -5,13 +5,27 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch via NPM",
+      "request": "launch",
+      "runtimeArgs": [
+        "run-script",
+        "debug"
+      ],
+      "runtimeExecutable": "npm",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+
+    {
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/05_debugging_in_node_js/examples/ex_01/app.js",
+      "program": "${workspaceFolder}/Express_JS/examples/chp-06-storing_data/into_json_files/ex-01",
       "restart": true,
       "runtimeExecutable": "nodemon",
       "console": "integratedTerminal"

@@ -1,0 +1,25 @@
+{
+  "name": "ex-01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "SET NODE_ENV=development & nodemon app.js",
+    "start": "SET NODE_ENV=production & node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.8",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "tailwindcss": "^4.1.8"
+  },
+  "devDependencies": {
+    "dotenv": "^16.5.0",
+    "nodemon": "^3.1.10"
+  }
+}

@@ -1,0 +1,39 @@
+<%- include("./header.ejs") %>
+<%- include("./navbar.ejs") %>
+  </ul>
+</nav>
+<main class="w-full min-h-screen">
+  <section class="w-full p-12 flex">
+    <div class="w-3/5 mx-auto border-pink-700 rounded-xl p-8">
+      <form action="/host/add-accomodation" method="post">
+        <div class="py-2">
+          <label for="buildingName" class="font-bold capitalize">Building Name</label> <br>
+          <input type="text" name="buildingName" id="buildingName" class="border-2 rounded p-2">
+        </div>
+        <div class="py-2">
+          <label for="imageURL" class="font-bold capitalize">Building Image</label> <br>
+          <input type="text" name="imageURL" id="imageURL" class="border-2 rounded p-2" placeholder="Enter the image name">
+        </div>
+        <div class="py-2">
+          <label for="location" class="font-bold capitalize">Location</label> <br>
+          <textarea name="location" id="location" class="border-2 rounded p-2" rows="6" cols="60"></textarea>
+        </div>
+        <div class="py-2">
+          <label for="amenities" class="font-bold capitalize">Amenities</label> <br>
+          <input type="checkbox" name="amenities" id="amenities" multiple class="" value="king size bed"> King Size Bed <input type="checkbox" name="amenities" id="amenities" multiple class="p-2" value="hair dryer"> Hair Dryer <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="shampoo & conditioner"> Shampoo & Conditioner <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="hot or cold water"> Hot or Cold Water <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="shower gel"> Shower Gel <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="washing machine"> Washing Machine <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="iron"> Iron <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="hangers"> Hangers <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="bed linen cotton"> Bed Linen (Cotton) <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="extra pillow & blankets"> Extra Pillow & Blankets
+          <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="wifi"> Wifi <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="first aid kit"> First Aid Kit <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="tv"> TV <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="ac"> AC <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="ceiling fan"> Ceiling Fan <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="room heater"> Room Heater <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="refrigerator"> Refrigerator <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="induction or oven"> Induction or Oven <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="cooking basics"> Cooking Basics <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="dishes & cutlery"> Dishes & Cutlery <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="kitchen"> Kitchen <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="lift"> Lift <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="balcony"> Balcony <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="parking"> Parking <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="outdoor games"> Outdoor Games <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="self check-in"> Self check-in <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="pets allowed"> Pets allowed <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="smoking allowed"> Smoking Allowed <input type="checkbox" name="amenities" id="amenities" multiple class="pl-2" value="long-term stay allowed"> Long-term Stay Allowed
+        </div>
+        <div class="py-2">
+          <label for="price" class="font-bold capitalize">Price (Indian Rupee)</label> <br>
+          <input type="number" name="price" id="price" class="border-2 rounded p-2" step="0.01">
+        </div>
+        <div class="py-2">
+          <button type="submit" class="p-2 border-2 text-black cursor-pointer">Add Accomodation</button>
+          <button type="reset" class="p-2 border-2 cursor-pointer">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<%- include("./footer.ejs") %>
