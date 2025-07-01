@@ -10,7 +10,7 @@
     <h1 class="page-title text-center text-3xl font-bold text-purple-500 capitalize"><%= pageTitle %></h1>
     <div class="w-3/5 mx-auto border-2 rounded-2xl mt-4 p-6">
       <h4 class="font-bold">Enter the follwing details -</h4>
-      <form action="<% if(userType === 'user'){ %>/register<% }else{ %>/host/registration<% } %>" method="post">
+      <form action="<% if(userType === 'user'){ %>/registration<% }else{ %>/host/registration<% } %>" method="POST">
         <div class="form-group w-full my-3">
           <label for="username" class="form-label ml-1 font-semibold">Username</label> <br>
           <input type="text" name="username" id="username" class="form-control w-full border-2 rounded p-2 mt-1" placeholder="enter your username">

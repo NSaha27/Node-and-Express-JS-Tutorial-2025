@@ -42,20 +42,16 @@ async function hostRegistration(req, res, next){
     const encryptedPassword = await bcrypt.hash(password, 10);
     try{
       const newHost = new Host(username, name, ssn, address, nationality, phone, email, encryptedPassword);
-      newHost.save(result => {
-        if(result.length > 0){
-          res.setHeader("message", result);
-          res.status(302).redirect("/host/registration");
-        }else{
-          res.setHeader("message", "*registration successful!");
-          res.status(302).redirect("/host/login");
-        }
-      })
+      await newHost.save();
+      // res.status(200).render("success", {pageTitle: "Registration successful!", redirectTo: "log in", redirectURL: "/host/login", userType: "host"});
+      res.status(302).redirect(`/host/login?msg=${encodeURIComponent("*registration successful!")}`);
     }catch(err){
-      next(err.message);
+      // res.status(200).render("success", {pageTitle: "Registration failed!", result: err.message, redirectTo: "registration", redirectURL: "/host/registration", userType: "host"});
+      // next(err.message);
+      res.status(302).redirect(`/host/registration?msg=${encodeURIComponent(err.message)}`);
     }
   }else{
-    next("*all fields are required!");
+    res.status(302).redirect(`/host/registration?msg=${encodeURIComponent("*all fields are required!")}`);
   }
 }
 

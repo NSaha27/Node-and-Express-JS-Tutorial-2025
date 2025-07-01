@@ -1,0 +1,41 @@
+<%- include("./header.ejs") %>
+<%- include("./navbar.ejs") %>
+    <li class="float-left"><a href="/services" class="decoration-0 block py-2 px-6 transition-duration: 0.2s hover:bg-white hover:text-pink-500">Services</a></li>
+    <% if(userType === "client"){ %>
+      <li class="float-left"><a href="/host/signup" class="decoration-0 block py-2 px-6 transition-duration: 0.2s hover:bg-white hover:text-pink-500">Become a host</a></li>
+    <% } %>
+    <li class="float-left"><a href="<% if(userType === 'host'){ %>/host/signup<% }else{ %>/signup<% } %>" class="decoration-0 block py-2 px-6 transition-duration: 0.2s hover:bg-white hover:text-pink-500">Sign up</a></li>
+  </ul>
+</nav>
+<main class="">
+  <section class="">
+    <h2 class=""><%= pageTitle %></h2>
+    <div class="signup-form-container">
+      <div class="">
+        <form action="<% if(userType === 'host'){ %>/host/login<% }else if(userType === 'admin'){ %>/admin/login<% }else{ %>/login<% } %>" method="POST">
+          <div class="">
+            <div class="">
+              <label for="username" class="">Username</label> <br>
+              <input type="text" name="username" id="username" class="" placeholder="enter a username here..." required>
+            </div>
+            <div class="">
+              <label for="password" class="">Password</label> <br>
+              <input type="password" name="password" id="password" class="" placeholder="enter your password here..." required>
+            </div>
+          </div>
+          <div class="">
+            <button type="submit" class="">Log in</button>
+          </div>
+        </form>
+      </div>
+      <div class="">
+        <h4 class="">OR</h4>
+        <p>
+          not yet registered? sign up <a href="<% if(userType === 'host'){ %>/host/signup<% }else{ %>/signup<% } %>" class="">here</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include("./footer.ejs") %>
