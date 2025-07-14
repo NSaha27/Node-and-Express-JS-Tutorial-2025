@@ -1,10 +1,10 @@
 <%- include("./header.ejs") %>
 <%- include("./navbar.ejs") %>
-    <li class="float-left"><a href="/services" class="decoration-0 block py-2 px-6 transition-duration: 0.2s hover:bg-white hover:text-pink-500">Services</a></li>
+    <li class="float-left"><a href="/services" class="decoration-0 block py-2 px-6 text-white transition-duration: 0.2s hover:bg-white hover:text-pink-500">Services</a></li>
     <% if(userType !== "host"){ %>
-      <li class="float-left"><a href="/host/signup" class="decoration-0 block py-2 px-6 transition-duration: 0.2s hover:bg-white hover:text-pink-500">Become a host</a></li>
+      <li class="float-left"><a href="/host/signup" class="decoration-0 block py-2 px-6 text-white transition-duration: 0.2s hover:bg-white hover:text-pink-500">Become a host</a></li>
     <% } %>
-    <li class="float-left"><a href="<% if(userType === 'host'){ %>/host/login<% }else{ %>/login<% } %>" class="decoration-0 block py-2 px-6 transition-duration: 0.2s hover:bg-white hover:text-pink-500">Log in</a></li>
+    <li class="float-left"><a href="<% if(userType === 'host'){ %>/host/login<% }else{ %>/login<% } %>" class="decoration-0 block py-2 px-6 text-white transition-duration: 0.2s hover:bg-white hover:text-pink-500">Log in</a></li>
   </ul>
 </nav>
 <main class="">
