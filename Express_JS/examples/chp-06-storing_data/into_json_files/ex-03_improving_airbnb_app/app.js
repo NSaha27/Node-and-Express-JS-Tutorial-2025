@@ -22,14 +22,14 @@ app.set("views", "views");
 const HOST = process.env.HOST || "127.0.0.1";
 const PORT = process.env.NODE_ENV === "development" ? 3000 : 5000;
 
-app.use(express.static(path.join(process.cwd(), "/public")));
+app.use(express.static(path.resolve(process.cwd(), "public")));
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 app.use("/host", hostRouter);
-app.use(clientRouter);
-app.use(airbnbRouter);
+app.use("/client", clientRouter);
+app.use("/", airbnbRouter);
 
 app.use(errorHandler);
 

@@ -69,8 +69,8 @@ class Accomodation{
     const filePath = Accomodation.getFilePath();
     try{
       let data = await fs.readFile(filePath, "utf-8");
-      const accomodations = JSON.parse(data);
-      return accomodations.length > 0 ? accomodations : [];
+      const accomodations = data ? JSON.parse(data) : [];
+      return accomodations;
     }catch(err){
       if(err.code === "ENOENT"){
         return "*** no accomodation file was found!";

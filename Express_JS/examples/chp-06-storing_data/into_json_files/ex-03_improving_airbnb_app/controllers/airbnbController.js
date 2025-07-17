@@ -4,7 +4,7 @@ import Accomodation from "../models/accomodationModel.js";
 const airbnbController = {};
 
 airbnbController.loadHomePage = async (req, res, next) => {
-  const message = req.headers["message"] ? req.headers["message"] : "";
+  const message = req.query.message ? req.query.message : "";
   const username = req.cookies["username"] ? req.cookies["username"] : "";
   const userType = req.cookies["userType"] ? req.cookies["userType"] : "client";
   const isLoggedIn = username.length > 0 ? true : false;
@@ -17,6 +17,7 @@ airbnbController.loadHomePage = async (req, res, next) => {
       throw new Error(allAccomodations);
     }
   }catch(err){
+    console.log(err.stack);
     next(err.message);
   }
 };

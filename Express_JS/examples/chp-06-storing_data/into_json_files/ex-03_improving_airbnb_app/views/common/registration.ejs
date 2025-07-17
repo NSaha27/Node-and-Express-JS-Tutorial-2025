@@ -4,7 +4,7 @@
     <% if(userType !== "host"){ %>
       <li class="float-left"><a href="/host/signup" class="decoration-0 block py-2 px-6 text-white transition-duration: 0.2s hover:bg-white hover:text-pink-500">Become a host</a></li>
     <% } %>
-    <li class="float-left"><a href="<% if(userType === 'host'){ %>/host/login<% }else{ %>/login<% } %>" class="decoration-0 block py-2 px-6 text-white transition-duration: 0.2s hover:bg-white hover:text-pink-500">Log in</a></li>
+    <li class="float-left"><a href="<% if(userType === 'host'){ %>/host/login<% }else{ %>/client/login<% } %>" class="decoration-0 block py-2 px-6 text-white transition-duration: 0.2s hover:bg-white hover:text-pink-500">Log in</a></li>
   </ul>
 </nav>
 <main class="">
@@ -12,7 +12,7 @@
     <h2 class=""><%= pageTitle %></h2>
     <div class="signup-form-container">
       <div class="">
-        <form action="<% if(userType === 'host'){ %>/host/signup<% }else{ %>/signup<% } %>" method="POST">
+        <form action="<% if(userType === 'host'){ %>/host/signup<% }else{ %>/client/signup<% } %>" method="POST">
           <div class="">
             <div class="">
               <div class="">
@@ -63,7 +63,7 @@
       <div class="">
         <h4 class="">OR</h4>
         <p>
-          already registered? log in <a href="<% if(userType === 'host'){ %>/host/login<% }else if(userType === 'admin'){ %>/admin/login<% }else{ %>/login<% } %>" class="">here</a>
+          already registered? log in <a href="<% if(userType === 'host'){ %>/host/login<% }else if(userType === 'admin'){ %>/admin/login<% }else{ %>/client/login<% } %>" class="">here</a>
         </p>
       </div>
     </div>
