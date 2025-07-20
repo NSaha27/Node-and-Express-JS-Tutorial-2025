@@ -1,0 +1,73 @@
+<%- include("./header.ejs") %>
+<%- include("./navbar.ejs") %>
+    <li class="float-left"><a href="/services" class="decoration-0 block py-2 px-6 text-white transition-duration: 0.2s hover:bg-white hover:text-pink-500">Services</a></li>
+    <% if(userType !== "host"){ %>
+      <li class="float-left"><a href="/host/signup" class="decoration-0 block py-2 px-6 text-white transition-duration: 0.2s hover:bg-white hover:text-pink-500">Become a host</a></li>
+    <% } %>
+    <li class="float-left"><a href="<% if(userType === 'host'){ %>/host/login<% }else{ %>/client/login<% } %>" class="decoration-0 block py-2 px-6 text-white transition-duration: 0.2s hover:bg-white hover:text-pink-500">Log in</a></li>
+  </ul>
+</nav>
+<main class="">
+  <section class="">
+    <h2 class=""><%= pageTitle %></h2>
+    <div class="signup-form-container">
+      <div class="">
+        <form action="<% if(userType === 'host'){ %>/host/signup<% }else{ %>/client/signup<% } %>" method="POST">
+          <div class="">
+            <div class="">
+              <div class="">
+                <label for="username" class="">Username</label> <br>
+                <input type="text" name="username" id="username" class="" placeholder="enter a username here..." required>
+              </div>
+              <div class="">
+                <label for="name" class="">Name</label> <br>
+                <input type="text" name="name" id="name" class="" placeholder="enter your name here..." required>
+              </div>
+              <% if(userType === "host"){ %>
+              <div class="">
+                <label for="ssn" class="">SSN Number (without spaces and any special symbol)</label> <br>
+                <input type="password" name="ssn" id="ssn" class="" placeholder="enter your SSN number here..." required>
+              </div>
+              <% } %>
+              <div class="">
+                <label for="address" class="">Address</label> <br>
+                <textarea name="address" id="address" class="" rows="7" placeholder="enter your full address here..."></textarea>
+              </div>
+            </div>
+            <div class="">
+              <div class="">
+                <label for="phone" class="">Phone (with country code)</label> <br>
+                <input type="text" name="phone" id="phone" class="" placeholder="enter your phone number here..." required>
+              </div>
+              <div class="">
+                <label for="email" class="">Email</label> <br>
+                <input type="email" name="email" id="email" class="" placeholder="enter your email ID here..." required>
+              </div>
+              <div class="">
+                <label for="password" class="">Password</label> <br>
+                <input type="password" name="password" id="password" class="" placeholder="enter your password here..." required>
+              </div>
+              <div class="">
+                <label for="confirmPassword" class="">Confirm Password</label> <br>
+                <input type="text" name="confirmPassword" id="confirmPassword" class="" placeholder="confirm your password here..." required>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <div class="">
+              <button type="submit" class="">Sign up</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="">
+        <h4 class="">OR</h4>
+        <p>
+          already registered? log in <a href="<% if(userType === 'host'){ %>/host/login<% }else if(userType === 'admin'){ %>/admin/login<% }else{ %>/client/login<% } %>" class="">here</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include("./footer.ejs") %>

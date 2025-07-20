@@ -1,0 +1,94 @@
+<%- include("../common/header.ejs") %>
+<%- include("../common/navbar.ejs") %>
+    <li class="float-left"><a href="/host/account" class="decoration-0 block py-2 px-6 text-white transition-duration: 0.2s hover:bg-white hover:text-pink-500">Profile</a></li>
+    <li class="float-left"><a href="/host/accomodations" class="decoration-0 block py-2 px-6 text-white transition-duration: 0.2s hover:bg-white hover:text-pink-500">My accomodations</a></li>
+    <li class="float-left"><a href="/host/logout" class="decoration-0 block py-2 px-6 text-white transition-duration: 0.2s hover:bg-white hover:text-pink-500">Log out</a></li>
+  </ul>
+</nav>
+<main class="">
+  <section class="">
+    <h2 class=""><%= pageTitle %></h2>
+    <div class="add-accomodation-form-container">
+      <div class="">
+        <form action="/host/add-accomodation" method="POST" enctype="multipart/form-data">
+          <div class="">
+            <div class="">
+              <input type="hidden" name="host" value="<%= username %>">
+              <div class="">
+                <label for="buildingName" class="">Building name</label> <br>
+                <input type="text" name="buildingName" id="buildingName" class="">
+              </div>
+              <div class="">
+                <label for="" class="">Building type</label> <br>
+                <label for="buildingType" class="">
+                  <input type="radio" name="buildingType" id="buildingType" class="" value="home"> Home 
+                </label>
+                <label for="buildingType" class="">
+                  <input type="radio" name="buildingType" id="buildingType" class="" value="flat"> Flat 
+                </label>
+                <label for="buildingType" class="">
+                  <input type="radio" name="buildingType" id="buildingType" class="" value="apartment"> Apartment 
+                </label>
+                <label for="buildingType" class="">
+                  <input type="radio" name="buildingType" id="buildingType" class="" value="guestHouse"> Guest house 
+                </label>
+                <label for="buildingType" class="">
+                  <input type="radio" name="buildingType" id="buildingType" class="" value="hotel"> Hotel 
+                </label>
+                <label for="buildingType" class="">
+                  <input type="radio" name="buildingType" id="buildingType" class="" value="villa"> Villa 
+                </label>
+              </div>
+              <div class="">
+                <label for="rent" class="">Rent (for 2 nights)(in Rupee)</label> <br>
+                <input type="number" name="rent" id="rent" class="" step="0.01">
+              </div>
+              <div class="">
+                <label for="buildingImages" class="">Building images</label> <br>
+                <input type="file" name="buildingImages" id="buildingImages" class="" multiple>
+              </div>
+              <div class="">
+                <label for="contactNumber" class="">Contact number</label> <br>
+                <input type="text" name="contactNumber" id="contactNumber" class="">
+              </div>
+            </div>
+            <div class="">
+              <div class="">
+                <label for="addrBuildingNumber" class="">Building number</label> <br>
+                <input type="text" name="addrBuildingNumber" id="addrBuildingNumber" class="">
+              </div>
+              <div class="">
+                <label for="addrRoad" class="">Road / Street</label> <br>
+                <input type="text" name="addrRoad" id="addrRoad" class="">
+              </div>
+              <div class="">
+                <label for="addrTownVillage" class="">Town / Village</label> <br>
+                <input type="text" name="addrTownVillage" id="addrTownVillage" class="">
+              </div>
+              <div class="">
+                <label for="addrDistrict" class="">District</label> <br>
+                <input type="text" name="addrDistrict" id="addrDistrict" class="">
+              </div>
+              <div class="">
+                <label for="addrState" class="">State</label> <br>
+                <input type="text" name="addrState" id="addrState" class="">
+              </div>
+              <div class="">
+                <label for="addrCountry" class="">Country</label> <br>
+                <input type="text" name="addrCountry" id="addrCountry" class="">
+              </div>
+              <div class="">
+                <label for="addrZipCode" class="">Zip code</label> <br>
+                <input type="number" name="addrZipCode" id="addrZipCode" class="">
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <button type="submit" class="">Add</button>
+            <button type="reset" class="">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
