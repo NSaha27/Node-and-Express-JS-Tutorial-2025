@@ -1,5 +1,4 @@
 import conn from "../utils/dbConnection.js";
-import path from "node:path";
 
 class Host {
   constructor(username, name, ssn, address, phone, email, password) {
@@ -57,7 +56,18 @@ class Host {
     }
   }
 
-  static async findByusername(username) {}
+  static async findByUsername(username) {
+    if(username.length === 0){
+      return "*** please enter a valid username!";
+    }
+    const existingHosts = await Host.fetchAll();
+    const foundHost = existingHosts.filter(host => host.username === username);
+    if(foundHost.length > 0){
+      return foundHost[0];
+    }else{
+      return "*** no such host with this username is found!";
+    }
+  }
 }
 
 export default Host;
