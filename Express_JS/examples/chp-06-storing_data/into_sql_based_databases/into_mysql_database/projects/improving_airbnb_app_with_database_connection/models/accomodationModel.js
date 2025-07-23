@@ -1,19 +1,33 @@
-import fs from "node:fs/promises";
-import path from "node:path";
+import conn from "../utils/dbConnection.js";
 
-function generateBuildingRegdID(){
+function generateBuildingRegdID() {
   const alp = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const num = "1234567890";
   const alpNum = alp.concat(num);
   let regdID = "";
-  while(regdID.length < 10){
+  while (regdID.length < 10) {
     regdID += alpNum[Math.floor(Math.random() * alpNum.length)];
   }
   return regdID;
 }
 
-class Accomodation{
-  constructor(host, buildingName, buildingType, rent, buildingImages, contactNumber, addrBuildingNumber, addrRoad, addrTownVillage, addrDistrict, addrState, addrCountry, addrZipCode, rating = 3.5){
+class Accomodation {
+  constructor(
+    host,
+    buildingName,
+    buildingType,
+    rent,
+    buildingImages,
+    contactNumber,
+    addrBuildingNumber,
+    addrRoad,
+    addrTownVillage,
+    addrDistrict,
+    addrState,
+    addrCountry,
+    addrZipCode,
+    rating = 3.5
+  ) {
     this.regdID = "#" + generateBuildingRegdID();
     this.host = host;
     this.buildingName = buildingName;
@@ -31,70 +45,88 @@ class Accomodation{
     this.rating = rating;
   }
 
-  static getFilePath(){
-    return path.resolve(process.cwd(), "data", "accomodation.json");
-  }
-
-  async save(){
-    const filePath = Accomodation.getFilePath();
-    let prevAccomodations = [];
-
-    try{
-      const data = await fs.readFile(filePath, "utf-8");
-      prevAccomodations = data ? JSON.parse(data) : [];
-    }catch(err){
-      if(err.code !== "ENOENT"){
-        throw new Error(`*** could not read accomodation file, error: ${err.message}!`);
-      }
+  async save() {
+    const duplicateAccomodation =
+      await Accomodation.findByUsernameBuildingNameAddrNumber(
+        this.host,
+        this.buildingName,
+        this.addrBuildingNumber
+      );
+    if (duplicateAccomodation.length > 0) {
+      return "*** a same accomodation with this name and address is already registered!";
     }
-
-    const duplicateEntry = prevAccomodations.find(acc => acc.buildingName === this.buildingName && acc.contactNumber === this.contactNumber);
-
-    if(duplicateEntry){
-      return "*** a similar accomodation is already registered at our portal!";
-    }
-
-    prevAccomodations.push(this);
-
-    try{
-      await fs.mkdir(path.dirname(filePath), {recursive: true});
-      await fs.writeFile(filePath, JSON.stringify(prevAccomodations, null, 2));
-      return true;
-    }catch(err2){
-      throw new Error(`*** couldn't write accomodation file, error: ${err2.message}!`);
+    try {
+      // write sql query and execute it to save this accomodation into database
+    } catch (err) {
+      throw new Error(
+        `*** unable to add the accomodation, error: ${err.message}`
+      );
     }
   }
 
-  static async findAllAccomodations(){
-    const filePath = Accomodation.getFilePath();
-    try{
-      let data = await fs.readFile(filePath, "utf-8");
-      const accomodations = data ? JSON.parse(data) : [];
-      return accomodations;
-    }catch(err){
-      if(err.code === "ENOENT"){
-        return "*** no accomodation file was found!";
-      }
-      throw new Error(`*** couldn't read accomodation file, error: ${err.message}!`);
+  static async fetchAll() {
+    try {
+      const sql = "SELECT * FROM accomodations";
+      const [rows, fields] = conn.execute(sql);
+      return rows.length > 0 ? rows : [];
+    } catch (err) {
+      throw new Error(
+        `*** unable to fetch accomodations, error: ${err.message}`
+      );
     }
   }
 
-  static async findAccomodationsOfAHost(host){
-    const allAccomodations = await Accomodation.findAllAccomodations();
-    if(allAccomodations.length > 0){
-      const foundAccomodations = allAccomodations.filter(acc => acc.host === host);
-      return foundAccomodations.length > 0 ? foundAccomodations : "*** this host has not registered any accomodation yet!";
+  static async findByUsernameBuildingNameAddrNumber(
+    hostUsername,
+    buildingName,
+    addrBuildingNumber
+  ) {
+    if (hostUsername.length === 0) {
+      return "*** please enter a valid username!";
     }
-    return "*** no accomodation is yet registered at our portal!";
+    try {
+      const sql =
+        "SELECT * FROM accomodations WHERE host = ?, buildingName = ?, addrBuildingNumber = ?";
+      const values = [hostUsername, buildingName, addrBuildingNumber];
+      const [rows, fields] = conn.execute(sql, values);
+      return rows.length > 0 ? rows : [];
+    } catch (err) {
+      throw new Error(
+        `*** unable to find the accomodation, error: ${err.message}`
+      );
+    }
   }
 
-  static async findAccomodationByRegdID(regdID){
-    const allAccomodations = await Accomodation.findAllAccomodations();
-    if(allAccomodations.length > 0){
-      const accomodationFound = allAccomodations.filter(acc => acc.regdID === regdID);
-      return accomodationFound.length > 0 ? accomodationFound[0] : "*** no such accomodation with this registration id was found!";
+  static async findByHostUsername(hostUsername) {
+    if (hostUsername.length === 0) {
+      return "*** please enter a valid username!";
     }
-    return "*** no accomodation is yet registered at our portal!";
+    try {
+      const sql = "SELECT * FROM accomodations WHERE host = ?";
+      const values = [hostUsername];
+      const [rows, fields] = conn.execute(sql, values);
+      return rows.length > 0 ? rows : [];
+    } catch (err) {
+      throw new Error(
+        `*** unable to find the accomodation, error: ${err.message}`
+      );
+    }
+  }
+
+  static async findByRegdID(regdID) {
+    if (regdID.length === 0) {
+      return "*** please enter a valid registration ID!";
+    }
+    try {
+      const sql = "SELECT * FROM accomodations WHERE regdID = ?";
+      const values = [regdID];
+      const [rows, fields] = conn.execute(sql, values);
+      return rows.length > 0 ? rows[0] : {};
+    } catch (err) {
+      throw new Error(
+        `*** unable to find the accomodation, error: ${err.message}`
+      );
+    }
   }
 }
 

@@ -12,16 +12,13 @@ class Host {
   }
 
   async save() {
-    const existingHosts = await Host.fetchAll();
-    const foundAt = existingHosts.findIndex(
-      (host) => host.name === this.name && host.ssn === this.ssn
-    );
-    if (foundAt !== -1) {
-      return "*** host with the same ssn number is already registered!";
+    const hostFound = await Host.findBySSNPhone(this.ssn, this.phone);
+    if (hostFound) {
+      return "*** host with the same ssn and phone number is already registered!";
     }
     try {
       const sql =
-        "INSERT INTO hosts(username, name, ssn, address, phone, email, password) VALUES ('', '', '', '', '', '', '')";
+        "INSERT INTO hosts(username, name, ssn, address, phone, email, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
       const value = [
         this.username,
         this.name,
@@ -52,20 +49,38 @@ class Host {
       const [rows, fields] = await conn.execute("SELECT * FROM hosts");
       return rows.length > 0 ? rows : [];
     } catch (err) {
-      throw new Error(`*** unable to find hosts, error: ${err.message}`);
+      throw new Error(`*** unable to fetch host infoes, error: ${err.message}`);
+    }
+  }
+
+  static async findBySSNPhone(ssn, phone) {
+    if (ssn.length === 0) {
+      return "*** please enter a valid SSN number!";
+    }
+    if (phone.length === 0) {
+      return "*** please enter a valid phone number!";
+    }
+    try {
+      const sql = "SELECT * FROM hosts WHERE ssn = ?, phone = ?";
+      const values = [ssn, phone];
+      const [rows, fields] = await conn.execute(sql, values);
+      return rows.length > 0 ? rows[0] : {};
+    } catch (err) {
+      throw new Error(`*** unable to find the host, error: ${err.message}`);
     }
   }
 
   static async findByUsername(username) {
-    if(username.length === 0){
+    if (username.length === 0) {
       return "*** please enter a valid username!";
     }
-    const existingHosts = await Host.fetchAll();
-    const foundHost = existingHosts.filter(host => host.username === username);
-    if(foundHost.length > 0){
-      return foundHost[0];
-    }else{
-      return "*** no such host with this username is found!";
+    try {
+      const sql = "SELECT * FROM hosts WHERE username = ?";
+      const values = [username];
+      const [rows, fields] = await conn.execute(sql, values);
+      return rows.length > 0 ? rows[0] : {};
+    } catch (err) {
+      throw new Error(`*** unable to find the host, error: ${err.message}`);
     }
   }
 }
