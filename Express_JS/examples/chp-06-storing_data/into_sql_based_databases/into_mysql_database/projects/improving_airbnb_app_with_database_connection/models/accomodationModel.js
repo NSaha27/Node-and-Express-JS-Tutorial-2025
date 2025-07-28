@@ -56,7 +56,10 @@ class Accomodation {
       return "*** a same accomodation with this name and address is already registered!";
     }
     try {
-      // write sql query and execute it to save this accomodation into database
+      const sql = "INSERT INTO accomodations(regdID, host, buildingName, buildingType, rent, buildingImages, contactNumber, addrBuildingNumber, addrRoad, addrTownVillage, addrDistrict, addrState, addrCountry, addrZipCode, rating) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      const values = [this.regdID, this.host, this.buildingName, this.buildingType, this.rent, this.buildingImages, this.contactNumber, this.addrBuildingNumber, this.addrRoad, this.addrTownVillage, this.addrDistrict, this.addrState, this.addrCountry, this.addrZipCode, this.rating];
+      const [result, fields] = conn.execute(sql, values);
+      return result ? true : false;
     } catch (err) {
       throw new Error(
         `*** unable to add the accomodation, error: ${err.message}`
@@ -67,7 +70,8 @@ class Accomodation {
   static async fetchAll() {
     try {
       const sql = "SELECT * FROM accomodations";
-      const [rows, fields] = conn.execute(sql);
+      const [rows, fields] = await conn.execute(sql);
+      console.log(rows);
       return rows.length > 0 ? rows : [];
     } catch (err) {
       throw new Error(
@@ -88,7 +92,7 @@ class Accomodation {
       const sql =
         "SELECT * FROM accomodations WHERE host = ?, buildingName = ?, addrBuildingNumber = ?";
       const values = [hostUsername, buildingName, addrBuildingNumber];
-      const [rows, fields] = conn.execute(sql, values);
+      const [rows, fields] = await conn.execute(sql, values);
       return rows.length > 0 ? rows : [];
     } catch (err) {
       throw new Error(
@@ -104,7 +108,7 @@ class Accomodation {
     try {
       const sql = "SELECT * FROM accomodations WHERE host = ?";
       const values = [hostUsername];
-      const [rows, fields] = conn.execute(sql, values);
+      const [rows, fields] = await conn.execute(sql, values);
       return rows.length > 0 ? rows : [];
     } catch (err) {
       throw new Error(
@@ -120,7 +124,7 @@ class Accomodation {
     try {
       const sql = "SELECT * FROM accomodations WHERE regdID = ?";
       const values = [regdID];
-      const [rows, fields] = conn.execute(sql, values);
+      const [rows, fields] = await conn.execute(sql, values);
       return rows.length > 0 ? rows[0] : {};
     } catch (err) {
       throw new Error(

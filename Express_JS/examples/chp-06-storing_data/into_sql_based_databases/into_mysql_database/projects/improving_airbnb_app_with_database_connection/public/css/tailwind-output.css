@@ -233,12 +233,6 @@
   .bg-pink-500 {
     background-color: var(--color-pink-500);
   }
-  .bg-cover {
-    background-size: cover;
-  }
-  .bg-no-repeat {
-    background-repeat: no-repeat;
-  }
   .p-0 {
     padding: calc(var(--spacing) * 0);
   }

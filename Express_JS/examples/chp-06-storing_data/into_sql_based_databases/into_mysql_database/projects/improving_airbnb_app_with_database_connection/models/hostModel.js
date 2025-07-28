@@ -33,12 +33,8 @@ class Host {
       const [result, fields] = await conn.query(`INSERT INTO hosts(username, name, ssn, address, phone, email, password) VALUES('${this.username}', '${this.name}', '${this.ssn}', '${this.address}', '${this.phone}', '${this.email}', '${this.password}')`);
       */
       // prepared statement style
-      const [result, fields] = conn.execute(sql, value);
-      if (result) {
-        return true;
-      } else {
-        return false;
-      }
+      const [result, fields] = await conn.execute(sql, value);
+      return result ? true : false;
     } catch (err) {
       throw new Error(`*** unable to register the host, error: ${err.message}`);
     }
@@ -61,7 +57,7 @@ class Host {
       return "*** please enter a valid phone number!";
     }
     try {
-      const sql = "SELECT * FROM hosts WHERE ssn = ?, phone = ?";
+      const sql = "SELECT * FROM hosts WHERE ssn = ? AND phone = ?";
       const values = [ssn, phone];
       const [rows, fields] = await conn.execute(sql, values);
       return rows.length > 0 ? rows[0] : {};
@@ -76,7 +72,7 @@ class Host {
     }
     try {
       const sql = "SELECT * FROM hosts WHERE username = ?";
-      const values = [username];
+      const values = [username,];
       const [rows, fields] = await conn.execute(sql, values);
       return rows.length > 0 ? rows[0] : {};
     } catch (err) {

@@ -10,7 +10,7 @@ airbnbController.loadHomePage = async (req, res, next) => {
   const isLoggedIn = username.length > 0 ? true : false;
 
   try{
-    const allAccomodations = await Accomodation.findAllAccomodations();
+    const allAccomodations = await Accomodation.fetchAll();
     if(Array.isArray(allAccomodations)){
       return res.status(200).render("common/index", {pageTitle: "Home page", username: username, message: message, isLoggedIn: isLoggedIn, userType: userType, accomodations: allAccomodations});
     }else{

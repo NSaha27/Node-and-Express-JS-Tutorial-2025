@@ -46,11 +46,7 @@ class Client {
         this.password,
       ];
       const [result, fields] = await conn.execute(sql, values);
-      if (result) {
-        return true;
-      } else {
-        return false;
-      }
+      return result ? true : false;
     } catch (err) {
       throw new Error(
         `*** something went wrong, unable to register the client, error: ${err.message}`

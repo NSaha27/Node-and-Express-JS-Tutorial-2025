@@ -54,7 +54,7 @@ hostController.loadHostLoginPage = (req, res, next) => {
 hostController.hostLogin = async (req, res, next) => {
   const {username, password} = req.body;
   try{
-    const getResult = await Host.findHostByUsername(username);
+    const getResult = await Host.findByUsername(username);
     if(typeof getResult === "string"){
       return res.status(303).redirect(`/host/login?message=${encodeURIComponent(getResult)}`)
     }else{

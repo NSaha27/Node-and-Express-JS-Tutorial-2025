@@ -21,13 +21,13 @@ clientController.loadClientSignupPage = (req, res, next) => {
 };
 
 clientController.clientSignup = async (req, res, next) => {
-  const {username, name, address, phone, email, password, confirmPassword} = req.body;
+  const {username, name, gender, idType, idNumber, address, phone, email, password, confirmPassword} = req.body;
   if(password !== confirmPassword){
     return res.status(303).redirect(`/client/signup?message=${encodeURIComponent("***password and confirm password must be same!")}`);
   }
   const encryptedPsw = await bcrypt.hash(password, 10);
   try{
-    const newClient = new Client(username, name, address, phone, email, encryptedPsw);
+    const newClient = new Client(username, name, gender, idType, idNumber, address, phone, email, encryptedPsw);
     await newClient.save();
     return res.status(302).redirect(`/client/login?message=${encodeURIComponent("***registration successful, please log in now!")}`);
   }catch(err){
@@ -53,7 +53,7 @@ clientController.loadClientLoginPage = (req, res, next) => {
 clientController.clientLogin = async (req, res, next) => {
   const {username, password} = req.body;
   try{
-    const getResult = await Client.findClientByUsername(username);
+    const getResult = await Client.findByUsername(username);
     if(typeof getResult === "string"){
       return res.status(303).redirect(`/client/login?message=${encodeURIComponent(getResult)}`)
     }else{
