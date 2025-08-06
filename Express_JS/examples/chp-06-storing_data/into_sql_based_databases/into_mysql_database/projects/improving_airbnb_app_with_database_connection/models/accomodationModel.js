@@ -57,8 +57,8 @@ class Accomodation {
     }
     try {
       const sql = "INSERT INTO accomodations(regdID, host, buildingName, buildingType, rent, buildingImages, contactNumber, addrBuildingNumber, addrRoad, addrTownVillage, addrDistrict, addrState, addrCountry, addrZipCode, rating) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-      const values = [this.regdID, this.host, this.buildingName, this.buildingType, this.rent, this.buildingImages, this.contactNumber, this.addrBuildingNumber, this.addrRoad, this.addrTownVillage, this.addrDistrict, this.addrState, this.addrCountry, this.addrZipCode, this.rating];
-      const [result, fields] = conn.execute(sql, values);
+      const values = [this.regdID, this.host, this.buildingName, this.buildingType, this.rent, JSON.stringify(this.buildingImages), this.contactNumber, this.addrBuildingNumber, this.addrRoad, this.addrTownVillage, this.addrDistrict, this.addrState, this.addrCountry, this.addrZipCode, this.rating];
+      const [result, fields] = await conn.execute(sql, values);
       return result ? true : false;
     } catch (err) {
       throw new Error(
@@ -71,7 +71,6 @@ class Accomodation {
     try {
       const sql = "SELECT * FROM accomodations";
       const [rows, fields] = await conn.execute(sql);
-      console.log(rows);
       return rows.length > 0 ? rows : [];
     } catch (err) {
       throw new Error(
@@ -88,9 +87,15 @@ class Accomodation {
     if (hostUsername.length === 0) {
       return "*** please enter a valid username!";
     }
+    if (buildingName.length === 0) {
+      return "*** please enter a valid premise name!";
+    }
+    if (addrBuildingNumber.length === 0) {
+      return "*** please enter a valid premise number!";
+    }
     try {
       const sql =
-        "SELECT * FROM accomodations WHERE host = ?, buildingName = ?, addrBuildingNumber = ?";
+        "SELECT * FROM accomodations WHERE host = ? AND buildingName = ? AND addrBuildingNumber = ?";
       const values = [hostUsername, buildingName, addrBuildingNumber];
       const [rows, fields] = await conn.execute(sql, values);
       return rows.length > 0 ? rows : [];
@@ -107,12 +112,12 @@ class Accomodation {
     }
     try {
       const sql = "SELECT * FROM accomodations WHERE host = ?";
-      const values = [hostUsername];
+      const values = [hostUsername,];
       const [rows, fields] = await conn.execute(sql, values);
       return rows.length > 0 ? rows : [];
     } catch (err) {
       throw new Error(
-        `*** unable to find the accomodation, error: ${err.message}`
+        `*** unable to find the accomodation list, error: ${err.message}`
       );
     }
   }
@@ -123,7 +128,7 @@ class Accomodation {
     }
     try {
       const sql = "SELECT * FROM accomodations WHERE regdID = ?";
-      const values = [regdID];
+      const values = [regdID,];
       const [rows, fields] = await conn.execute(sql, values);
       return rows.length > 0 ? rows[0] : {};
     } catch (err) {

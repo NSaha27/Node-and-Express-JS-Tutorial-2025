@@ -103,13 +103,23 @@ hostController.hostLogout = (req, res, next) => {
   }
 }
 
-hostController.loadAddAccomodationPage = (req, res, next) => {
+hostController.loadAddAccomodationPage = async (req, res, next) => {
   const message = req.query.message ? req.query.message : "";
+  const accRegdID = req.query.accRegdID ? decodeURIComponent(req.query.accRegdID) : "";
   const username = req.cookies["username"] ? req.cookies["username"] : "";
   const isLoggedIn = username.length > 0 ? true : false;
   try{
     if(isLoggedIn){
-      return res.status(200).render("host/addAccomodation", {pageTitle: "Add accomodation", username: username, message: message});
+      if(accRegdID.length > 0){
+        try{
+          const getAcc = await Accomodation.findByRegdID(accRegdID);
+          console.log(getAcc);
+          return res.status(200).render("host/addAccomodation", {pageTitle: "Add accomodation", username: username, message: message, editMode: true, accToUpdate: getAcc});
+        }catch(err2){
+          return next(err2.message);
+        }
+      }
+      return res.status(200).render("host/addAccomodation", {pageTitle: "Add accomodation", username: username, message: message, editMode: false});
     }else{
       return res.status(303).redirect(`/host/login?message=${encodeURIComponent("***please log in at first!")}`);
     }
@@ -179,6 +189,24 @@ hostController.addAccomodation = async (req, res, next) => {
   }
 }
 
-
+hostController.loadMyAccomodationsPage = async (req, res, next) => {
+  const message = req.query.message ? req.query.message : "";
+  const username = req.cookies["username"] ? req.cookies["username"] : "";
+  const isLoggedIn = username.length > 0 ? true : false;
+  try{
+    if(!isLoggedIn){
+      res.status(303).redirect(`/host/login?message=${encodeURIComponent("*** please log in at first!")}`);
+    }else{
+      try{
+        const accomodationList = await Accomodation.findByHostUsername(username);
+        res.status(200).render("host/myAccomodation", {pageTitle: "My Accomodations", userType: "host", username: username, message: message, accomodations: accomodationList});
+      }catch(err2){
+        next(err2.message);
+      }
+    }
+  }catch(err){
+    next(err.message);
+  }
+}
 
 export default hostController;

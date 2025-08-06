@@ -13,7 +13,7 @@ class Host {
 
   async save() {
     const hostFound = await Host.findBySSNPhone(this.ssn, this.phone);
-    if (hostFound) {
+    if (Object.entries(hostFound).length > 0) {
       return "*** host with the same ssn and phone number is already registered!";
     }
     try {

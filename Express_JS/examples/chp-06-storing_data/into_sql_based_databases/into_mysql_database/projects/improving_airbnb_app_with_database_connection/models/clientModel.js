@@ -28,7 +28,7 @@ class Client {
       this.idNumber,
       this.phone
     );
-    if (clientFound) {
+    if (Object.entries(clientFound).length > 0) {
       return "*** you're already registered, please log in!";
     }
     try {
@@ -74,7 +74,7 @@ class Client {
       return "*** please enter a valid phone number!";
     }
     try {
-      const sql = "SELECT * FROM hosts WHERE idNumber = ?, phone = ?";
+      const sql = "SELECT * FROM hosts WHERE idNumber = ? AND phone = ?";
       const values = [idNumber, phone];
       const [rows, fields] = await conn.execute(sql, values);
       return rows.length > 0 ? rows[0] : {};
@@ -89,7 +89,7 @@ class Client {
     }
     try {
       const sql = "SELECT * FROM clients WHERE username = ?";
-      const values = [username];
+      const values = [username,];
       const [rows, fields] = await conn.execute(sql, values);
       return rows.length > 0 ? rows[0] : {};
     } catch (err) {

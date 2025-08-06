@@ -17,13 +17,13 @@
     <div class="mt-4 p-4 grid grid-cols-4 gap-4">
       <% if(accomodations.length > 0){ %>
         <% for(acc of accomodations){ %>
-          <div class="border-2 rounded-2xl min-h-96">
-            <div class="w-full max-h-32 overflow-hidden" style="background-image: url('uploads/<%= acc.buildingImages[0] %>'); background-repeat: no-repeat; background-size: cover;">
-              <img src="" alt="" class="card-image">
+          <div class="flex flex-col border-2 border-pink-600 rounded-2xl min-h-96">
+            <div class="w-full overflow-hidden max-h-42" >
+              <img src="/uploads/<%= acc.buildingImages[0] %>" alt="" class="card-image w-full max-h-full rounded-t-2xl">
             </div>
-            <div class="card-body">
-              <h4 class=""><%= acc.buildingType.charAt(0).toUpperCase() + acc.buildingType.slice(1) %> in <%= acc.addrDistrict %></h4>
-              <p class="">
+            <div class="card-body w-full p-4">
+              <h4 class="text-xl text-pink-500 font-semibold mt-2"><%= acc.buildingType.charAt(0).toUpperCase() + acc.buildingType.slice(1) %> in <%= acc.addrDistrict %></h4>
+              <p class="mt-4 font-semibold flex flex-row justify-between items-center">
                 <span class="">
                   Rs.<%= acc.rent %> for 2 nights
                 </span>
@@ -32,8 +32,9 @@
                 </span>
               </p>
             </div>
-            <div class="card-footer">
-              <a href="" class="btn">Reserve</a>
+            <div class="card-footer w-full p-4 mt-4 flex flex-row justify-around items-center">
+              <a href="#" class="bg-pink-500 text-white border-2 border-pink-500 font-semibold py-2 px-6">Book Now</a>
+              <a href="#" class="bg-white text-pink-500 border-2 border-pink-500 font-semibold py-2 px-6">Favourites </a>
             </div>
           </div>
         <% } %>

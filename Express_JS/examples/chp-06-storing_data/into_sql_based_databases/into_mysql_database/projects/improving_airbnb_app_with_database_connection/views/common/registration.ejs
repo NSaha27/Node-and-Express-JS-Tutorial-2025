@@ -23,6 +23,21 @@
                 <label for="name" class="">Name</label> <br>
                 <input type="text" name="name" id="name" class="" placeholder="enter your name here..." required>
               </div>
+              <% if(userType === "client"){ %>
+              <div class="">
+                <label class="" for="male"><input type="radio" name="gender" id="male" class="" value="male"> Male</label>
+                <label class="" for="female"><input type="radio" name="gender" id="female" class="" value="female"> Female</label>
+                <label class="" for="other"><input type="radio" name="gender" id="other" class="" value="other"> Other</label>
+              </div>
+              <div class="">
+                <label for="idType" class="">ID type</label> <br>
+                <input type="text" name="idType" id="idType" class="" placeholder="enter your identity type">
+              </div>
+              <div class="">
+                <label for="idNumber" class="">ID number</label>
+                <input type="text" name="idNumber" class="" id="idNumber" placeholder="enter your identity number">
+              </div>
+              <% } %>
               <% if(userType === "host"){ %>
               <div class="">
                 <label for="ssn" class="">SSN Number (without spaces and any special symbol)</label> <br>
