@@ -10,9 +10,15 @@
     <h2 class=""><%= pageTitle %></h2>
     <div class="add-accomodation-form-container">
       <div class="">
-        <form action="/host/add-accomodation" method="POST" enctype="multipart/form-data">
+        <form action="<% if(editMode === true){ %>/host/edit-accomodation<% }else{ %>/host/add-accomodation<% } %>" method="POST" enctype="multipart/form-data">
           <div class="">
             <div class="">
+              <% if(editMode === true){ %>
+                <div class="">
+                  <label for="regdID" class="">Accomodation Regd. No.</label> <br>
+                  <input type="text" name="regdID" id="regdID" class="" value="<%= accToUpdate.regdID %>" readonly>
+                </div>  
+              <% } %>
               <input type="hidden" name="host" value="<%= username %>">
               <div class="">
                 <label for="buildingName" class="">Building name</label> <br>
@@ -21,27 +27,27 @@
               <div class="">
                 <label for="" class="">Building type</label> <br>
                 <label for="buildingType" class="">
-                  <input type="radio" name="buildingType" id="buildingType" class="" value="home"> Home 
+                  <input type="radio" name="buildingType" id="buildingType" class="" value="home" <% if(editMode === true && accToUpdate.buildingType === "home"){ %>checked<% } %> > Home 
                 </label>
                 <label for="buildingType" class="">
-                  <input type="radio" name="buildingType" id="buildingType" class="" value="flat"> Flat 
+                  <input type="radio" name="buildingType" id="buildingType" class="" value="flat" <% if(editMode === true && accToUpdate.buildingType === "flat"){ %>checked<% } %> > Flat 
                 </label>
                 <label for="buildingType" class="">
-                  <input type="radio" name="buildingType" id="buildingType" class="" value="apartment"> Apartment 
+                  <input type="radio" name="buildingType" id="buildingType" class="" value="apartment" <% if(editMode === true && accToUpdate.buildingType === "apartment"){ %>checked<% } %> > Apartment 
                 </label>
                 <label for="buildingType" class="">
-                  <input type="radio" name="buildingType" id="buildingType" class="" value="guest house"> Guest house 
+                  <input type="radio" name="buildingType" id="buildingType" class="" value="guest house" <% if(editMode === true && accToUpdate.buildingType === "guest house"){ %>checked<% } %> > Guest house 
                 </label>
                 <label for="buildingType" class="">
-                  <input type="radio" name="buildingType" id="buildingType" class="" value="hotel"> Hotel 
+                  <input type="radio" name="buildingType" id="buildingType" class="" value="hotel" <% if(editMode === true && accToUpdate.buildingType === "hotel"){ %>checked<% } %> > Hotel 
                 </label>
                 <label for="buildingType" class="">
-                  <input type="radio" name="buildingType" id="buildingType" class="" value="villa"> Villa 
+                  <input type="radio" name="buildingType" id="buildingType" class="" value="villa" <% if(editMode === true && accToUpdate.buildingType === "villa"){ %>checked<% } %> > Villa 
                 </label>
               </div>
               <div class="">
                 <label for="rent" class="">Rent (for 2 nights)(in Rupee)</label> <br>
-                <input type="number" name="rent" id="rent" class="" step="0.01">
+                <input type="number" name="rent" id="rent" class="" step="0.01" value="<% if(editMode === true && accToUpdate.rent.length > 0){ %><%= accToUpdate.rent %><% } %>">
               </div>
               <div class="">
                 <label for="buildingImages" class="">Building images</label> <br>
@@ -49,42 +55,48 @@
               </div>
               <div class="">
                 <label for="contactNumber" class="">Contact number</label> <br>
-                <input type="text" name="contactNumber" id="contactNumber" class="">
+                <input type="text" name="contactNumber" id="contactNumber" class="" value="<% if(editMode === true && accToUpdate.contactNumber.length > 0){ %><%= accToUpdate.contactNumber %><% } %>">
               </div>
             </div>
             <div class="">
               <div class="">
                 <label for="addrBuildingNumber" class="">Building number</label> <br>
-                <input type="text" name="addrBuildingNumber" id="addrBuildingNumber" class="">
+                <input type="text" name="addrBuildingNumber" id="addrBuildingNumber" class="" value="<% if(editMode === true && accToUpdate.addrBuildingNumber.length > 0){ %><%= accToUpdate.addrBuildingNumber %><% } %>">
               </div>
               <div class="">
                 <label for="addrRoad" class="">Road / Street</label> <br>
-                <input type="text" name="addrRoad" id="addrRoad" class="">
+                <input type="text" name="addrRoad" id="addrRoad" class="" value="<% if(editMode === true && accToUpdate.addrRoad.length > 0){ %><%= accToUpdate.addrRoad %><% } %>">
               </div>
               <div class="">
                 <label for="addrTownVillage" class="">Town / Village</label> <br>
-                <input type="text" name="addrTownVillage" id="addrTownVillage" class="">
+                <input type="text" name="addrTownVillage" id="addrTownVillage" class="" value="<% if(editMode === true && accToUpdate.addrTownVillage.length > 0){ %><%= accToUpdate.addrTownVillage %><% } %>">
               </div>
               <div class="">
                 <label for="addrDistrict" class="">District</label> <br>
-                <input type="text" name="addrDistrict" id="addrDistrict" class="">
+                <input type="text" name="addrDistrict" id="addrDistrict" class="" value="<% if(editMode === true && accToUpdate.addrDistrict.length > 0){ %><%= accToUpdate.addrDistrict %><% } %>">
               </div>
               <div class="">
                 <label for="addrState" class="">State</label> <br>
-                <input type="text" name="addrState" id="addrState" class="">
+                <input type="text" name="addrState" id="addrState" class="" value="<% if(editMode === true && accToUpdate.addrState.length > 0){ %><%= accToUpdate.addrState %><% } %>">
               </div>
               <div class="">
                 <label for="addrCountry" class="">Country</label> <br>
-                <input type="text" name="addrCountry" id="addrCountry" class="">
+                <input type="text" name="addrCountry" id="addrCountry" class="" value="<% if(editMode === true && accToUpdate.addrCountry.length > 0){ %><%= accToUpdate.addrCountry %><% } %>">
               </div>
               <div class="">
                 <label for="addrZipCode" class="">Zip code</label> <br>
-                <input type="number" name="addrZipCode" id="addrZipCode" class="">
+                <input type="number" name="addrZipCode" id="addrZipCode" class="" value="<% if(editMode === true && accToUpdate.addrZipCode.length > 0){ %><%= accToUpdate.addrZipCode %><% } %>">
               </div>
+              <% if(editMode === true){ %>
+                <div class="">
+                  <label for="rating" class="">Rating</label> <br>
+                  <input type="number" step="0.2" name="rating" id="rating" class="" value="<% if(editMode === true && accToUpdate.rating.length > 0){ %><%= accToUpdate.rating %><% } %>" readonly>
+                </div>
+              <% } %>
             </div>
           </div>
           <div class="">
-            <button type="submit" class="">Add</button>
+            <button type="submit" class=""><% if(editMode === true){ %>Edit<% }else{ %>Add<% } %></button>
             <button type="reset" class="">Cancel</button>
           </div>
         </form>

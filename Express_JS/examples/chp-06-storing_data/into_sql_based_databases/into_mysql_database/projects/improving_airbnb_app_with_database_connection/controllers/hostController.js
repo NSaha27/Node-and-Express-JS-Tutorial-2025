@@ -113,8 +113,7 @@ hostController.loadAddAccomodationPage = async (req, res, next) => {
       if(accRegdID.length > 0){
         try{
           const getAcc = await Accomodation.findByRegdID(accRegdID);
-          console.log(getAcc);
-          return res.status(200).render("host/addAccomodation", {pageTitle: "Add accomodation", username: username, message: message, editMode: true, accToUpdate: getAcc});
+          return res.status(200).render("host/addAccomodation", {pageTitle: "Edit accomodation", username: username, message: message, editMode: true, accToUpdate: getAcc});
         }catch(err2){
           return next(err2.message);
         }
@@ -133,6 +132,9 @@ hostController.addAccomodation = async (req, res, next) => {
   const buildingImages = req.files ? req.files["buildingImages"] : [];
   try{
     const errorMessage = [];
+    if(host.length === 0){
+      errorMessage.push("*** host's username is required!")
+    }
     if(buildingName.length === 0){
       errorMessage.push("***building name is required!");
     }
@@ -169,12 +171,13 @@ hostController.addAccomodation = async (req, res, next) => {
     if(addrZipCode.length === 0){
       errorMessage.push("***zip code is required!");
     }
+    const regdID = null;
     const rating = 3.5;
     if(errorMessage.length > 0){
-      return res.status(303).redirect(`/host/add-accomodation?message=${encodeURIComponent(errorMessage)}`);
+      return res.status(303).redirect(`/host/add-accomodation?message=${encodeURIComponent(errorMessage.toString())}`);
     }else{
       const imageOriginalNames = buildingImages.map(image => image.originalname);
-      const newAccomodation = new Accomodation(host, buildingName, buildingType, rent, imageOriginalNames, contactNumber, addrBuildingNumber, addrRoad, addrTownVillage, addrDistrict, addrState, addrCountry, addrZipCode, rating);
+      const newAccomodation = new Accomodation(host, buildingName, buildingType, rent, imageOriginalNames, contactNumber, addrBuildingNumber, addrRoad, addrTownVillage, addrDistrict, addrState, addrCountry, addrZipCode, rating, regdID);
       const result = await newAccomodation.save();
       if(typeof result !== "boolean"){
         return res.status(303).redirect(`/host/add-accomodation?message=${encodeURIComponent(result)}`);
@@ -203,6 +206,72 @@ hostController.loadMyAccomodationsPage = async (req, res, next) => {
       }catch(err2){
         next(err2.message);
       }
+    }
+  }catch(err){
+    next(err.message);
+  }
+}
+
+hostController.editAccomodation = async (req, res, next) => {
+  const {regdID, host, buildingName, buildingType, rent, contactNumber, addrBuildingNumber, addrRoad, addrTownVillage, addrDistrict, addrState, addrCountry, addrZipCode, rating} = req.body;
+  const buildingImages = req.files["buildingImages"] ? req.files["buildingImages"] : [];
+  try{
+    const errorMessage = [];
+    if(regdID.length === 0){
+      errorMessage.push("*** registration ID is required!");
+    }
+    if(host.length === 0){
+      errorMessage.push("*** host's username is required!");
+    }
+    if(buildingName.length === 0){
+      errorMessage.push("*** building name is required!");
+    }
+    if(buildingType.length === 0){
+      errorMessage.push("*** building type is required!");
+    }
+    if(rent.length === 0){
+      errorMessage.push("*** building rent is required!");
+    }
+    if(buildingImages.length === 0){
+      errorMessage.push("*** building images are required!");
+    }
+    if(contactNumber.length === 0){
+      errorMessage.push("*** building contact number is required!");
+    }
+    if(addrBuildingNumber.length === 0){
+      errorMessage.push("*** building number is required!");
+    }
+    if(addrRoad.length === 0){
+      errorMessage.push("*** road name is required!");
+    }
+    if(addrTownVillage.length === 0){
+      errorMessage.push("*** town or village name is required!");
+    }
+    if(addrDistrict.length === 0){
+      errorMessage.push("*** district name is required!");
+    }
+    if(addrState.length === 0){
+      errorMessage.push("*** state name is required!");
+    }
+    if(addrCountry.length === 0){
+      errorMessage.push("*** country name is required!");
+    }
+    if(addrZipCode.length === 0){
+      errorMessage.push("*** zip code is required!");
+    }
+    
+    if(errorMessage.length > 0){
+      return res.redirect(`/host/edit-accomodation?message=${encodeURIComponent(errorMessage.toString())}`);
+    }
+    
+    const imageOriginalNames = buildingImages.map(image => image.originalname);
+
+    const updatedAccomodation = new Accomodation(host, buildingName, buildingType, rent, imageOriginalNames, contactNumber, addrBuildingNumber, addrRoad, addrTownVillage, addrDistrict, addrState, addrCountry, addrZipCode, rating, regdID);
+    const result = await updatedAccomodation.edit();
+    if(typeof result !== "boolean"){
+      return res.status(303).redirect(`/host/edit-accomodation?message=${encodeURIComponent(result)}`);
+    }else{
+      return res.status(302).redirect(`/host/my-accomodations?message=${encodeURIComponent("*** your accomodation was successfully updated!")}`);
     }
   }catch(err){
     next(err.message);

@@ -13,6 +13,7 @@ function generateBuildingRegdID() {
 
 class Accomodation {
   constructor(
+    regdID,
     host,
     buildingName,
     buildingType,
@@ -26,9 +27,9 @@ class Accomodation {
     addrState,
     addrCountry,
     addrZipCode,
-    rating = 3.5
+    rating,
   ) {
-    this.regdID = "#" + generateBuildingRegdID();
+    this.regdID = regdID || "#" + generateBuildingRegdID();
     this.host = host;
     this.buildingName = buildingName;
     this.buildingType = buildingType;
@@ -42,7 +43,7 @@ class Accomodation {
     this.addrState = addrState;
     this.addrCountry = addrCountry;
     this.addrZipCode = addrZipCode;
-    this.rating = rating;
+    this.rating = rating || 3.5;
   }
 
   async save() {
@@ -135,6 +136,31 @@ class Accomodation {
       throw new Error(
         `*** unable to find the accomodation, error: ${err.message}`
       );
+    }
+  }
+
+  async edit(){
+    try{
+      const sql = "UPDATE accomodations SET host=?, buildingName=?, buildingType=?, rent=?, buildingImages=?, contactNumber=?, addrBuildingNumber=?, addrRoad=?, addrTownVillage=?, addrDistrict=?, addrState=?, addrCountry=?, addrZipCode=?, rating=? WHERE regdID=?";
+      const values = [this.host, this.buildingName, this.buildingType, this.rent, JSON.stringify(this.buildingImages), this.contactNumber, this.addrBuildingNumber, this.addrRoad, this.addrTownVillage, this.addrDistrict, this.addrState, this.addrCountry, this.addrZipCode, this.rating, this.regdID];
+      const [result, fields] = await conn.execute(sql, values);
+      return result ? true : false;
+    }catch(err){
+      throw new Error(`*** unanle to edit the accomodation, error: ${err.message}`);
+    }
+  }
+
+  static async delete(regdID){
+    if(regdID.length === 0){
+      return "*** please enter a valid registration ID!";
+    }
+    try{
+      const sql = "DELETE FROM accomodations WHERE regdID=?";
+      const values = [regdID,];
+      const [result, fields] = conn.execute(sql, values);
+      return result ? true : false;
+    }catch(err){
+      throw new Error(`*** unable to delete the accomodation, error: ${err.message}`);
     }
   }
 }

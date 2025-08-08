@@ -36,7 +36,7 @@
               </p>
             </div>
             <div class="card-footer w-1/4 h-full px-4 flex flex-col justify-center items-center gap-3">
-              <a href="/host/edit-accomodation?accRegdID=<%= acc.regdID %>" class="w-28 text-center bg-white text-pink-500 border-2 border-pink-500 font-semibold py-2 px-6">Edit </a>
+              <a href="/host/edit-accomodation?accRegdID=<%= encodeURIComponent(acc.regdID) %>" class="w-28 text-center bg-white text-pink-500 border-2 border-pink-500 font-semibold py-2 px-6">Edit </a>
               <form action="/host/delete-accomodation" method="post">
                 <input type="hidden" name="accRegdID" value="<%= acc.regdID %>">
                 <button type="submit" class="w-28 text-center bg-pink-500 text-white border-2 border-pink-500 font-semibold py-2 px-6">Delete</button>
