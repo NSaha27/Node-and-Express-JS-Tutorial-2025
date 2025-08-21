@@ -74,7 +74,7 @@ class Client {
       return "*** please enter a valid phone number!";
     }
     try {
-      const sql = "SELECT * FROM hosts WHERE idNumber = ? AND phone = ?";
+      const sql = "SELECT * FROM clients WHERE idNumber=? AND phone=?";
       const values = [idNumber, phone];
       const [rows, fields] = await conn.execute(sql, values);
       return rows.length > 0 ? rows[0] : {};

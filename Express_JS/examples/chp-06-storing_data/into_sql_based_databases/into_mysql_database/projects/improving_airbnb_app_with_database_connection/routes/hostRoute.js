@@ -15,6 +15,7 @@ router.get("/add-accomodation", hostController.loadAddAccomodationPage);
 router.post("/add-accomodation", uploadFields, hostController.addAccomodation);
 router.get("/my-accomodations", hostController.loadMyAccomodationsPage);
 router.get("/edit-accomodation", hostController.loadAddAccomodationPage);
-router.post("/edit-accomodation", hostController.editAccomodation);
+router.post("/edit-accomodation", uploadFields, hostController.editAccomodation);
+router.post("/delete-accomodation", hostController.deleteAccomodation);
 
 export default router;

@@ -1,12 +1,14 @@
 import bcrypt from "bcrypt";
 
+import Accomodation from "../models/accomodationModel.js";
 import Client from "../models/clientModel.js";
+import Favourites from "../models/favouritesModel.js";
 
 // module scaffolding
 const clientController = {};
 
 clientController.loadClientSignupPage = (req, res, next) => {
-  const message = req.query.message ? req.query.message : "";
+  const message = req.query.message ? decodeURIComponent(req.query.message) : "";
   const username = req.cookies["username"] ? req.cookies["username"] : "";
   const isLoggedIn = username.length > 0 ? true : false;
   try{
@@ -36,7 +38,7 @@ clientController.clientSignup = async (req, res, next) => {
 };
 
 clientController.loadClientLoginPage = (req, res, next) => {
-  const message = req.query.message ? req.query.message : "";
+  const message = req.query.message ? decodeURIComponent(req.query.message) : "";
   const username = req.cookies["username"] ? req.cookies["username"] : "";
   const isLoggedIn = username.length > 0 ? true : false;
   try{
@@ -71,15 +73,16 @@ clientController.clientLogin = async (req, res, next) => {
   }
 };
 
-clientController.loadClientHomePage = (req, res, next) => {
-  const message = req.query.message ? req.query.message : "";
+clientController.loadClientHomePage = async (req, res, next) => {
+  const message = req.query.message ? decodeURIComponent(req.query.message) : "";
   const username = req.cookies["username"] ? req.cookies["username"] : "";
   const isLoggedIn = username.length > 0 ? true : false;
   try{
     if(!isLoggedIn){
       return res.status(303).redirect(`/client/login?message=${"***please log in at first!"}`);
     }else{
-      return res.status(200).render("client/home", {pageTitle: "Client home page", userType: "client", username: username, message: message});
+      const allAccomodations = await Accomodation.fetchAll();
+      return res.status(200).render("client/home", {pageTitle: "Client home page", userType: "client", username: username, message: message, accomodations: allAccomodations});
     }
   }catch(err){
     next(err.message);
@@ -101,5 +104,52 @@ clientController.clientLogout = (req, res, next) => {
     next(err.message);
   }
 }
+
+clientController.addAccToFavourites = async (req, res, next) => {
+  console.log(req);
+  const username = req.cookies["username"] ? req.cookies["username"] : "";
+  const userType = req.cookies["userType"] ? req.cookies["userType"] : "client";
+  const accRegdID = req.query.accRegdID ? decodeURIComponent(req.query.accRegdID) : "";
+  
+  const isLoggedIn = username.length > 0 ? true : false;
+  try{
+    if(isLoggedIn && userType === "client"){
+      const newFavourites = new Favourites(username, accRegdID);
+      const result = await newFavourites.save();
+      if(typeof result === "boolean"){
+        if(result === true){
+          return res.status(302).redirect(`/client/home?message=${encodeURIComponent("*** the requested accomodation was successfully added to your favourites!")}`);
+        }else{
+          return res.status(303).redirect(`/client/home?message=${encodeURIComponent("*** unable to add the accomodation to favourites!")}&accRegdID=${encodeURIComponent(accRegdID)}`);
+        }
+      }else{
+        return res.status(303).redirect(`/client/home?message=${encodeURIComponent(result)}&accRegdID=${encodeURIComponent(accRegdID)}`);
+      }
+    }else{
+      return res.status(303).redirect(`/client/login?message=${encodeURIComponent("*** please log in at first!")}&accRegdID=${encodeURIComponent(accRegdID)}`)
+    }
+  }catch(err){
+    next(err.message);
+  }
+}
+
+clientController.loadFvouritesPage = async (req, res, next) => {
+  const message = req.query.message ? decodeURIComponent(req.query.message) : "";
+  const username = req.cookies["username"] ? req.cookies["username"] : "";
+  const userType = req.cookies["userType"] ? req.cookies["userType"] : "client";
+  const isLoggedIn = username.length > 0 ? true : false;
+  try{
+    if(!isLoggedIn){
+      return res.status(303).redirect(`/client/login?message=${encodeURIComponent("***please log in at first!")}`);
+    }else{
+      const favouriteList = await Favourites.fetchAll();
+      return res.status(200).render("client/favourites", {
+        pageTitle: "Favourites page", userType: userType, username: username, message: message, accomodations: favouriteList
+      });
+    }
+  }catch(err){
+    next(err.message);
+  }
+};
 
 export default clientController;

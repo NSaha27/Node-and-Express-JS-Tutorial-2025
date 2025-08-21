@@ -6,8 +6,38 @@
     <li class="float-left"><a href="/client/logout" class="decoration-0 block py-2 px-6 text-white transition-duration: 0.2s hover:bg-white hover:text-pink-500">Log out</a></li>
   </ul>
 </nav>
-<main class="">
-  <section class=""><%= pageTitle %></section>
+<main class="w-full">
+  <section class="w-full min-h-screen p-8">
+    <h2 class="text-2xl text-pink-500 font-semibold"><%= pageTitle %></h2>
+    <div class="mt-4 p-4 grid grid-cols-4 gap-4">
+      <% if(accomodations.length > 0){ %>
+        <% for(acc of accomodations){ %>
+          <div class="flex flex-col border-2 border-pink-600 rounded-2xl min-h-96">
+            <div class="w-full overflow-hidden min-h-44" >
+              <img src="/uploads/<%= acc.buildingImages[0] %>" alt="" class="card-image w-full h-full rounded-t-2xl">
+            </div>
+            <div class="card-body w-full h-full p-4">
+              <h4 class="text-xl text-pink-500 font-semibold mt-2"><%= acc.buildingType.charAt(0).toUpperCase() + acc.buildingType.slice(1) %> in <%= acc.addrDistrict %></h4>
+              <p class="mt-4 font-semibold flex flex-row justify-between items-center">
+                <span class="">
+                  Rs.<%= acc.rent %> for 2 nights
+                </span>
+                <span class="">
+                  ⭐<%= acc.rating %>
+                </span>
+              </p>
+            </div>
+            <div class="card-footer w-full h-full p-4 mt-4 flex flex-row justify-between items-center">
+              <a href="/client/add-to-bookings?accRegdID=<%= encodeURIComponent(acc.regdID) %>" class="bg-pink-500 text-white border-2 border-pink-500 font-semibold py-2 px-3">Book Now</a>
+              <a href="/client/add-to-favourites?accRegdID=<%= encodeURIComponent(acc.regdID) %>" class="bg-white text-pink-500 border-2 border-pink-500 font-semibold py-2 px-3">Add to Favourites</a>
+            </div>
+          </div>
+        <% } %>
+      <% }else{ %>
+        <h3 class="">no accomodation is yet registered!</h3>
+      <% } %>
+    </div>
+  </section>
 </main>
 
 <%- include("../common/footer.ejs") %>

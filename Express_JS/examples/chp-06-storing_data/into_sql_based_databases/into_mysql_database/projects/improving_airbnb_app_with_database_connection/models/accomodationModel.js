@@ -128,7 +128,7 @@ class Accomodation {
       return "*** please enter a valid registration ID!";
     }
     try {
-      const sql = "SELECT * FROM accomodations WHERE regdID = ?";
+      const sql = "SELECT * FROM accomodations WHERE regdID=?";
       const values = [regdID,];
       const [rows, fields] = await conn.execute(sql, values);
       return rows.length > 0 ? rows[0] : {};
@@ -152,12 +152,12 @@ class Accomodation {
 
   static async delete(regdID){
     if(regdID.length === 0){
-      return "*** please enter a valid registration ID!";
+      return "*** a valid registration ID is required!";
     }
     try{
       const sql = "DELETE FROM accomodations WHERE regdID=?";
-      const values = [regdID,];
-      const [result, fields] = conn.execute(sql, values);
+      const values = [regdID];
+      const [result, fields] = await conn.execute(sql, values);
       return result ? true : false;
     }catch(err){
       throw new Error(`*** unable to delete the accomodation, error: ${err.message}`);

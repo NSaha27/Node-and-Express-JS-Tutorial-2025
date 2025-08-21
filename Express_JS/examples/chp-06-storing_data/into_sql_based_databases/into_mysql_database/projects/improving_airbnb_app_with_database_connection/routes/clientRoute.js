@@ -10,5 +10,7 @@ router.get("/login", clientController.loadClientLoginPage);
 router.post("/login", clientController.clientLogin);
 router.get("/home", clientController.loadClientHomePage);
 router.get("/logout", clientController.clientLogout);
+router.get("/add-to-favourites", clientController.addAccToFavourites);
+router.get("/favourites", clientController.loadFvouritesPage);
 
 export default router;

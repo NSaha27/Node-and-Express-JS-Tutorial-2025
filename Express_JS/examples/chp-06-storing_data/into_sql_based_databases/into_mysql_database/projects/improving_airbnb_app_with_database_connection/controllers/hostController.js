@@ -177,7 +177,7 @@ hostController.addAccomodation = async (req, res, next) => {
       return res.status(303).redirect(`/host/add-accomodation?message=${encodeURIComponent(errorMessage.toString())}`);
     }else{
       const imageOriginalNames = buildingImages.map(image => image.originalname);
-      const newAccomodation = new Accomodation(host, buildingName, buildingType, rent, imageOriginalNames, contactNumber, addrBuildingNumber, addrRoad, addrTownVillage, addrDistrict, addrState, addrCountry, addrZipCode, rating, regdID);
+      const newAccomodation = new Accomodation(regdID, host, buildingName, buildingType, rent, imageOriginalNames, contactNumber, addrBuildingNumber, addrRoad, addrTownVillage, addrDistrict, addrState, addrCountry, addrZipCode, rating);
       const result = await newAccomodation.save();
       if(typeof result !== "boolean"){
         return res.status(303).redirect(`/host/add-accomodation?message=${encodeURIComponent(result)}`);
@@ -214,7 +214,7 @@ hostController.loadMyAccomodationsPage = async (req, res, next) => {
 
 hostController.editAccomodation = async (req, res, next) => {
   const {regdID, host, buildingName, buildingType, rent, contactNumber, addrBuildingNumber, addrRoad, addrTownVillage, addrDistrict, addrState, addrCountry, addrZipCode, rating} = req.body;
-  const buildingImages = req.files["buildingImages"] ? req.files["buildingImages"] : [];
+  let buildingImages = req.files["buildingImages"] ? req.files["buildingImages"] : [];
   try{
     const errorMessage = [];
     if(regdID.length === 0){
@@ -259,23 +259,60 @@ hostController.editAccomodation = async (req, res, next) => {
     if(addrZipCode.length === 0){
       errorMessage.push("*** zip code is required!");
     }
-    
-    if(errorMessage.length > 0){
-      return res.redirect(`/host/edit-accomodation?message=${encodeURIComponent(errorMessage.toString())}`);
+
+    if(buildingImages.length === 0){
+      const existingAcc = await Accomodation.findByRegdID(regdID);
+      if(!existingAcc || !existingAcc.buildingImages){
+        errorMessage.push("*** building images are required!");
+      }else{
+        buildingImages = JSON.parse(existingAcc.buildingImages);
+      }
+    }else{
+      buildingImages = buildingImages.map(image => image.originalname);
     }
     
-    const imageOriginalNames = buildingImages.map(image => image.originalname);
+    if(errorMessage.length > 0){
+      return res.redirect(`/host/edit-accomodation?regdID=${regdID}&message=${encodeURIComponent(errorMessage.toString())}`);
+    }
 
-    const updatedAccomodation = new Accomodation(host, buildingName, buildingType, rent, imageOriginalNames, contactNumber, addrBuildingNumber, addrRoad, addrTownVillage, addrDistrict, addrState, addrCountry, addrZipCode, rating, regdID);
+    const updatedAccomodation = new Accomodation(regdID, host, buildingName, buildingType, rent, buildingImages, contactNumber, addrBuildingNumber, addrRoad, addrTownVillage, addrDistrict, addrState, addrCountry, addrZipCode, rating);
+
     const result = await updatedAccomodation.edit();
+
     if(typeof result !== "boolean"){
       return res.status(303).redirect(`/host/edit-accomodation?message=${encodeURIComponent(result)}`);
     }else{
-      return res.status(302).redirect(`/host/my-accomodations?message=${encodeURIComponent("*** your accomodation was successfully updated!")}`);
+      if(result === true){
+        return res.status(302).redirect(`/host/my-accomodations?message=${encodeURIComponent("*** your accomodation was successfully updated!")}`);
+      }else{
+        return res.status(303).redirect(`/host/my-accomodations?message=${encodeURIComponent("*** unable to edit the accomodation!")}`);
+      }
     }
   }catch(err){
     next(err.message);
   }
 }
+
+hostController.deleteAccomodation = async (req, res, next) => {
+  const {accRegdID} = req.body;
+  try{
+    if(accRegdID.length === 0){
+      return res.status(303).redirect(`/host/my-accomodations?message=${encodeURIComponent("*** a valid registration ID is required!")}`);
+    }
+    const result = await Accomodation.delete(accRegdID);
+    if(typeof result !== "boolean"){
+      return res.status(303).redirect(`/host/my-accomodations?message=${encodeURIComponent(result)}`);
+    }else{
+      if(result === true){
+        return res.status(302).redirect(`/host/my-accomodations?message=${encodeURIComponent("*** your accomodation was successfully removed from our portal!")}`);
+      }else{
+        return res.status(303).redirect(`/host/my-accomodations?message=${encodeURIComponent("*** unable to delete the accomodation!")}`);
+      }
+    }
+  }catch(err){
+    console.log(err.stack);
+    next(err.message);
+  }
+};
 
 export default hostController;
