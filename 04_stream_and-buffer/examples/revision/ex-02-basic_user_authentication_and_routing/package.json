@@ -1,0 +1,20 @@
+{
+  "name": "ex-02-basic_user_authentication_and_routing",
+  "version": "1.0.0",
+  "description": "this project will have basic authentication and authorization",
+  "license": "ISC",
+  "author": "niladri saha",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "cookie": "^1.1.1"
+  }
+}

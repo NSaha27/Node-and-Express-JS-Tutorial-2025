@@ -1,0 +1,14 @@
+{
+  "name": "ex-01-taking_user_input_and_save_into_a_file",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "niladri saha",
+  "license": "ISC",
+  "type": "module"
+}

@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "name": "full stack web development using MERN stack",
+    "topics": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Tailwind CSS",
+      "React JS",
+      "Node JS",
+      "Express JS",
+      "PostgreSQL",
+      "Sequelize",
+      "MongoDB",
+      "Mongoose",
+      "REST APIs",
+      "GraphQL APIs",
+      "Next JS",
+      "Microservices",
+      "Git & GitHub",
+      "Docker",
+      "Deployment"
+    ],
+    "duration": 9,
+    "fee": 40000,
+    "discount": 10,
+    "rating": 4.5,
+    "no_of_enrollment": 158,
+    "next_batch_starts_from": "2026-04-01"
+  },
+  {
+    "id": 2,
+    "name": "full stack web development using Python and Django",
+    "topics": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Tailwind CSS",
+      "React JS",
+      "Python",
+      "Flask",
+      "SQLite",
+      "MongoDB",
+      "Django",
+      "REST APIs using Fast API",
+      "Microservices",
+      "Git & GitHub",
+      "Docker",
+      "Deployment"
+    ],
+    "duration": 9,
+    "fee": 38000,
+    "discount": 10,
+    "rating": 4.3,
+    "no_of_enrollment": 82,
+    "next_batch_starts_from": "2026-04-01"
+  }
+]
