@@ -1,6 +1,7 @@
 const EventEmitter = require("events");
 const fs = require("fs");
 const path = require("path");
+const bcrypt = require("bcrypt");
 
 // creating istance of the EventEmitter class
 const emitter = new EventEmitter();
@@ -11,31 +12,33 @@ const filepath = path.join(__dirname, filename);
 const loggedInUsersFilePath = path.join(__dirname, "loggedInUsers.txt");
 
 emitter.on("user-login", async (username, password) => {
-  let data;
+  let existingUsers;
   try {
-    data = (await fs.promises.readFile(filepath, "utf-8")) || "";
+    const data = await fs.promises.readFile(filepath, "utf-8");
+    existingUsers = (typeof data === "string" && data.length > 0) ? JSON.parse(data) : [];
   } catch (err) {
     console.error(`***unable to read the file, error: ${err.message}`);
     return false;
   }
-  if (typeof data === "string" && data.length > 0) {
-    const users = JSON.parse(data);
-    const user = users.find(
-      (user) => user.username === username && user.password === password,
-    );
-    if (!user) {
+  const user = existingUsers.find(
+    (user) => user.username === username
+  );
+  if (!user) {
+    console.log("***invalid log in credentials!");
+    return false;
+  }else{
+    const isPswMatched = await bcrypt.compare(password, user.password);
+    if(!isPswMatched){
       console.log("***invalid log in credentials!");
       return false;
+    }else{
+      console.log("***log in successful!");
+      try {
+        await fs.promises.appendFile(loggedInUsersFilePath, `${username}\n`);
+      } catch (err) {
+        console.error(err.message);
+      }
     }
-  } else {
-    console.log("***invalid data type!");
-    return false;
-  }
-  console.log("***log in successful!");
-  try {
-    await fs.promises.appendFile(loggedInUsersFilePath, `${username}\n`);
-  } catch (err) {
-    console.error(err.message);
   }
 });
 
@@ -72,12 +75,8 @@ emitter.on("user-signup", async (newUser) => {
   let existingUsers;
   try {
     const data = await fs.promises.readFile(filepath, "utf-8");
-    if (typeof data === "string" && data.length > 0) {
-      existingUsers = JSON.parse(data);
-    } else {
-      console.error("***invalid data type!");
-      return false;
-    }
+    existingUsers = (typeof data === "string" && data.length > 0) ?
+       JSON.parse(data) : [];
   } catch (err) {
     console.error("***unable to read the users.json file, error:", err.message);
     return false;
@@ -89,7 +88,8 @@ emitter.on("user-signup", async (newUser) => {
     console.log("***you're already registered!");
     return false;
   } else {
-    const newUserList = [...existingUsers, newUser];
+    const newUserObj = {...newUser, password: await bcrypt.hash(newUser.password, 10)};
+    const newUserList = [...existingUsers, newUserObj];
     try {
       await fs.promises.writeFile(filepath, JSON.stringify(newUserList));
       console.log("***sign up successful!");
