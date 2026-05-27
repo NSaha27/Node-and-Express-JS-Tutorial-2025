@@ -1,20 +1,22 @@
-**What is Node JS?**
+# Node JS
+
+### What is Node JS?
 
 Node JS is a Javascript runtime environment built on google chrome’s V8 Javascript engine, which is used to run javascript programs outside of the browser.
 
-**Why Node JS is used?**
+### Why Node JS is used?
 
 In a client-server architecture, mainly what happens is – when we search something or make any request, then a request is sent from client browser to server. At server Node JS exists which handles that incoming request and generates a response (with or without the help of database) against that request and sends that response to the client browser.
 
 So, in short, Node JS handles the backend server like JAVA or ASP.net or PHP etc.
 
-**Who developed Node JS?**
+### Who developed Node JS?
 
 A google engineer named “Ryan Dahl” developed Node JS.
 
 He wrote a software in C++ and added google’s V8 javascript engine with it to run any Javascript code in it and this way he created Node JS. So, Node JS is a combination of C++ and V8 Javascript engine.
 
-**How DNS work?**
+### How DNS work?
 
 **Domain Name Entry:** Here user types a domain(example \- www.example.com) into the browser.
 
@@ -24,13 +26,31 @@ He wrote a software in C++ and added google’s V8 javascript engine with it to 
 
 **Browser connects:** The browser uses the IP address to connect to the web server and loads the website.
 
+### Does Node JS support "window" and "document" objects?
+
+    Node JS was created to run JavaScript outside of the browser. It doesn't have anything with the browser, hence, it doesn't deal with "window" or "document" object.
+
+### What is "global" object?
+
+    Node JS has support of a global object like window object, called "global". It is similar to the window object but has less functionality as compared to it.
+
+### How did developers come with a solution for different global objects for different JavaScript environments?
+
+In ECMA2020 (ES11) standard, developers introduced a global object called "globalThis" to eliminate global object confliction on different browsers.
+
+This object simply changes itself according to the JavaScript environment it is used in.
+ex. -
+For browsers : window,
+For Node JS : global,
+For Web Workers : self,
+
 **Node JS Modules?**
 
 There are 3 type of modules Node JS has, like –
 
-1) Built-in modules,  
-2) Third-party modules  
-3) Personal modules
+1. Built-in modules,
+2. Third-party modules
+3. Personal modules
 
 **Personal modules** are those modules which are created by us.
 
@@ -40,19 +60,19 @@ There are 3 type of modules Node JS has, like –
 
 **Built-in modules** are those modules which are in-build in Node JS.
 
-**Ex.** 
+**Ex.**
 
-	http \-\> this module is used to connect our application with server and send http requests.
+    http \-\> this module is used to connect our application with server and send http requests.
 
-	https \-\> this module does the same job as http module but when sending requests it uses encryption.
+    https \-\> this module does the same job as http module but when sending requests it uses encryption.
 
-	Path \-\> this module helps interact with file path.
+    Path \-\> this module helps interact with file path.
 
-	OS \-\> this module helps interact with our system’s OS.
+    OS \-\> this module helps interact with our system’s OS.
 
-	fs \-\> this module handles file I/O.
+    fs \-\> this module handles file I/O.
 
-	utility/util \-\> this module provides utility support to our application. 
+    utility/util \-\> this module provides utility support to our application.
 
 **Using different built-in modules :-**
 
@@ -66,12 +86,12 @@ Then to get different information about OS use different methods of “os” obj
 
 To get information about –
 
-1. User, use – os.userInfo(),  
-2. System’s uptime in seconds, use – os.uptime(),  
-3. OS type, use – os.type(), (result – Linux on Linux OS, Darwin on MacOS, Windows\_NT on Windows OS),  
-4. OS released version, use – os.release(),  
-5. Total memory available in our system, use – os.totalmem() (in bytes),  
-6. Free memory available in our system, use – os.freemem() (in bytes),  
+1. User, use – os.userInfo(),
+2. System’s uptime in seconds, use – os.uptime(),
+3. OS type, use – os.type(), (result – Linux on Linux OS, Darwin on MacOS, Windows_NT on Windows OS),
+4. OS released version, use – os.release(),
+5. Total memory available in our system, use – os.totalmem() (in bytes),
+6. Free memory available in our system, use – os.freemem() (in bytes),
 7. etc.
 
 **PATH module –**
@@ -82,10 +102,10 @@ Const path \= require(“path”);
 
 Then to access different methods of “path” object we need –
 
-1. To get separator of a path, use – path.sep(),  
-2. To create a path by joining different segments, use – path.join(“segment\_1”, “segment\_2”, “segment\_3”, …, “main file with extension”);  (result – [/segment\_1/segment\_2/](http://domain/segment%201/segment%202/) segment\_3/.../main file with extension),  
-3. To get relative path, use – path.basename(full\_path);  (result – for example – “test.txt” or “image.png” or “info.pdf” etc.),  
-4. To get absolute path, use – path.resolve(\_\_dirname, ‘segment\_1’, ‘segment\_2’, … , ‘test.txt’);  (result –/full\_directory\_path/segment\_1/segment\_2/.../test.txt),
+1. To get separator of a path, use – path.sep(),
+2. To create a path by joining different segments, use – path.join(“segment_1”, “segment_2”, “segment_3”, …, “main file with extension”); (result – [/segment_1/segment_2/](http://domain/segment%201/segment%202/) segment_3/.../main file with extension),
+3. To get relative path, use – path.basename(full_path); (result – for example – “test.txt” or “image.png” or “info.pdf” etc.),
+4. To get absolute path, use – path.resolve(\_\_dirname, ‘segment_1’, ‘segment_2’, … , ‘test.txt’); (result –/full_directory_path/segment_1/segment_2/.../test.txt),
 
 **FS module \-**
 
@@ -105,14 +125,14 @@ Npm stands for Node Package Manager. It is a third party package installer of No
 
 **How to check the version of npm?**
 
-Write  “npm \--version” or “npm \--v” in terminal to check the version of npm. Note that its version is different from that of Node JS.
+Write “npm \--version” or “npm \--v” in terminal to check the version of npm. Note that its version is different from that of Node JS.
 
 **What npm does?**
 
 Npm helps to install mainly two type of packages/dependencies/modules whatever you called. These are –
 
-1) **Local dependencies –** use them only in our current project. To install, use – “npm i \<packageName\>” or “npm install \<packageName\>”.  
-2) **Global dependencies –** use them in any project as they are being installed globally. To install, use – “npm install –g \<packageName\>” (for windows) or “sudo npm install –g \<packageName\>” (for Mac).
+1. **Local dependencies –** use them only in our current project. To install, use – “npm i \<packageName\>” or “npm install \<packageName\>”.
+2. **Global dependencies –** use them in any project as they are being installed globally. To install, use – “npm install –g \<packageName\>” (for windows) or “sudo npm install –g \<packageName\>” (for Mac).
 
 **What is a Package?**
 
@@ -140,14 +160,14 @@ A registry is a public storage for open-source packages. ex. \- Express, React, 
 
 We need to pass some command in our terminal to push our project in the github repo.
 
-1) git init  
-2) git add .      (add an empty repository)(we can also write “git add README.md”)  
-3) git commit –m “initial repository”    (we can also change the repository name)  
-4) git branch \-M main  
-5) git remote add origin [https://github.com/NiladriSaha1992/node-js-tut.git](https://github.com/NiladriSaha1992/node-js-tut.git)  
-6) If pull is required \- i) git config pull.rebase true, ii) git pull origin main
+1. git init
+2. git add . (add an empty repository)(we can also write “git add README.md”)
+3. git commit –m “initial repository” (we can also change the repository name)
+4. git branch \-M main
+5. git remote add origin [https://github.com/NiladriSaha1992/node-js-tut.git](https://github.com/NiladriSaha1992/node-js-tut.git)
+6. If pull is required \- i) git config pull.rebase true, ii) git pull origin main
 
-7) git push \-u origin main
+7. git push \-u origin main
 
 **What is nodemon?**
 
@@ -163,8 +183,8 @@ To use nodemon we have to make a change in package.json file like this –
 
 Under “scripts” property we can either –
 
-1) Add a sub-property called “**dev**” and set “**nodemon file\_name.js**” as its value and in terminal we have to pass this command \- “**npm run dev**”.  
-2) Add a sub-property called “**start**” and set “**nodemon file\_name.js**” as its value and in terminal we have to pass this command – “**npm start**”. 
+1. Add a sub-property called “**dev**” and set “**nodemon file_name.js**” as its value and in terminal we have to pass this command \- “**npm run dev**”.
+2. Add a sub-property called “**start**” and set “**nodemon file_name.js**” as its value and in terminal we have to pass this command – “**npm start**”.
 
 Now, if we save our Node JS code and runs it in a browser and then make any changes to our code and again save it, nodemon will automatically refresh our server and we will see the changes in the browser.
 
@@ -178,7 +198,7 @@ Event Loop is a process to loop an event so that a process never ends or keeps o
 
 This Event Loop concept is a key concept in Javascript as well as in Node JS. In Node JS event loop is used in keeping our server running so that any visitor can access our website from anywhere and at any time and can continuously keep requesting and getting responses.
 
-![event-loop\_gohdkk.png][image1]
+![event-loop_gohdkk.png][image1]
 
 How to terminate Event Loop forcefully at any position of a program?
 
@@ -192,11 +212,11 @@ Event Loop Sequence \-
 
 The events will be queued and executed by the event loop in the following way \-
 
-1. Any synchronous code  
-2. Any microtask (Promises)  
-3. Any timer related code (setTimeout(), setInterval() etc.)  
-4. Any setImmediate code (Check) (setImmediate())  
-5. Any I/O related code (fs.readFile(), fs.writeFile() etc.)  
+1. Any synchronous code
+2. Any microtask (Promises)
+3. Any timer related code (setTimeout(), setInterval() etc.)
+4. Any setImmediate code (Check) (setImmediate())
+5. Any I/O related code (fs.readFile(), fs.writeFile() etc.)
 6. Any Closing operation ([req.on](http://req.on)(“end”), [req.on](http://req.on)(“exit”) etc.)
 
 Request Object \-

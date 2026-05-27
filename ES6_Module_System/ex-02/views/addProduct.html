@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>add product</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Add Product</h1>
+      <p class="message">*enter the following details...</p>
+      <div class="add-product-form">
+        <form action="/add-product" method="POST">
+          <div class="form-group">
+            <label for="title" class="form-label">Product Title</label> <br />
+            <input type="text" name="title" id="title" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="category" class="form-label">Category</label> <br />
+            <select name="category" id="category" class="form-control">
+              <option value="" disabled>Select an option</option>
+              <option value="AC">AC</option>
+              <option value="Cooler">Cooler</option>
+              <option value="Desktop">Desktop</option>
+              <option value="Laptop">Laptop</option>
+              <option value="Mobile">Mobile</option>
+              <option value="Monitor">Monitor</option>
+              <option value="Refridgerator">Refridgerator</option>
+              <option value="Table & Stand Fan">Table & Stand Fan</option>
+              <option value="TV">TV</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="description" class="form-label">Description</label>
+            <br />
+            <textarea
+              name="description"
+              id="description"
+              class="form-control"
+              rows="10"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="price" class="form-label">Price</label> <br />
+            <input
+              type="number"
+              step="0.2"
+              name="price"
+              id="price"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn">ADD</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
