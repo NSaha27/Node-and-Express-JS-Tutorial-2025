@@ -1,0 +1,14 @@
+{
+  "name": "04-fetch_and_display_data_module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "Niladri Saha",
+  "license": "ISC",
+  "type": "module"
+}
