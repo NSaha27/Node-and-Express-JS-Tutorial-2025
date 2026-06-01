@@ -44,7 +44,19 @@ For browsers : window,
 For Node JS : global,
 For Web Workers : self,
 
-**Node JS Modules?**
+## Node JS Modules
+
+---
+
+### What are modules in Node.js?
+
+Each of the .js or .mjs files in a Node JS application is called a module. They are encapsulated with unique pieces of code that defines unique functionalities.
+
+### What are packages in Node.js?
+
+A package is a set of different modules in Node.js.
+
+### How many types of modules is ther in Node.js?
 
 There are 3 type of modules Node JS has, like –
 
@@ -118,6 +130,15 @@ Then to access different methods of “path” object we need –
 **CRYPTO module \-**
 
 **URL module \-**
+
+### What are the differences between CommonJS and ES import statements?
+
+- CommonJS: require() statement is used to import any code from an external module. This statement is synchronous in nature, means, modules are imported in a synchronous way. We can use this statement anywhere in our code (even in conditional or function statements).
+- ES: import() statement is used to import any code from an external module. This statement is asynchronous in nature, means, we can import modules simultenously. We have to use this statement only at the beginning of our code.
+
+### Note-
+
+- Node JS is a JavaScript runtime environment that performs Input or Output (I/O) operations non-blockingly through different events.
 
 **What is npm?**
 
