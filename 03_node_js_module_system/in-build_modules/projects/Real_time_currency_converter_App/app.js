@@ -8,19 +8,36 @@ const rl = readline.createInterface({
 });
 
 function getConvertedAmount(){
-  console.log("Currency Converter Program:");
+  console.log("\nCurrency Converter Program:");
   rl.question("Enter amount (USD): ", (amount) => {
     if(isNaN(Number(amount))){
       console.error("***invalid amount!");
       return getConvertedAmount();
     }
     const sourceAmt = Number(amount);
-    rl.question("Enter the destination currency (ex. INR, EUR, DRH, etc.): ", (currency) => {
+    rl.question("Enter the destination currency (ex. INR, EUR, DRH, etc.): ", async (currency) => {
       if(currency.length === 0){
         console.error("***invalid currency!");
         return getConvertedAmount();
       }
-      converter(currency, sourceAmt);
+      try{
+        const result = await converter(currency, sourceAmt);
+        if(result){
+          console.log(result);
+          rl.question("Do you want to continue? (y/n): ", (ans) => {
+            if(ans === 'Y' || ans === "y"){
+              return getConvertedAmount();
+            }else if(ans === "N" || ans === "n"){
+              console.log("Thank you, please visit again :)");
+              return rl.close();
+            }
+          })
+        }
+      }catch(err){
+        console.error(`*unable to perform conversion, error: ${err.message}`);
+        rl.close();
+        return false;
+      }
     })
   })
 }
