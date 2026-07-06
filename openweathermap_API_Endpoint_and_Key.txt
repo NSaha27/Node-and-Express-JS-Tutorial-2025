@@ -1,0 +1,10 @@
+API Key: 
+1. 218e9e0383bccb69ac6e2d0294406ec2
+2. 4ac36aca8acfcbe46b1949f2157667be
+
+API Endpoint: https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+
+COORDINATES BY LOCATION NAME, POSTAL CODE, COUNTRY CODE, ETC.
+-------------------------------------------------------------
+
+API Endpoint: https://api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}

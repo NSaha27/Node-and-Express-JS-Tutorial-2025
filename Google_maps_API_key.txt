@@ -1,0 +1,17 @@
+API key and end points necessary for creating a Weather App
+------------------------------------------------------------
+------------------------------------------------------------
+
+To get weather details:
+-----------------------
+
+API end point: https://weather.googleapis.com/v1/currentConditions:lookup?key=YOUR_API_KEY&location.latitude=LATITUDE&location.longitude=LONGITUDE
+
+API key: AIzaSyDwEvDYVsOCDiX2DdsH4YTguL1qgqUuCyY
+
+To get Latitude and Longitude:
+-------------------------------
+
+API end point: https://geocode.googleapis.com/v4/geocode/address/ADDRESS_STRING?key=API_KEY
+
+where, ADDRESS_STRING is an unstructured address string.
