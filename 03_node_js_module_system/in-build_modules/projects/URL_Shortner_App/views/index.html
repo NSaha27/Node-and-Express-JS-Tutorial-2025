@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="./css/style.css" /> -->
+    <title>URL Shortner</title>
+  </head>
+  <body>
+    <main class="">
+      <div class="">
+        <div class="">
+          <h2 class="">URL Shortner</h2>
+          <form action="/" method="post" id="urlShortnerForm" class="">
+            <div class="">
+              <label for="actualURL" class="">Enter URL</label><br />
+              <input type="url" name="actualURL" id="actualURL" class="" />
+            </div>
+            <div class="">
+              <label for="shortCode" class="">Custom Short URL (optional)</label
+              ><br />
+              <input type="text" name="shortCode" id="shortCode" class="" />
+            </div>
+            <div class="">
+              <button type="submit" class="">Shorten</button>
+            </div>
+          </form>
+        </div>
+        <div class="">
+          <h2 class="">Shortened URLs</h2>
+          <div class="" id="shortenedURLList"></div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const urlShortnerForm = document.querySelector("#urlShortnerForm");
+      const shortenedURLList = document.querySelector("#shortenedURLList");
+      urlShortnerForm.addEventListener("submit", async (ev) => {
+        ev.preventDefault();
+        const formData = new FormData(ev.target);
+        const actualURL = formData.get("actualURL");
+        const shortCode = formData.get("shortCode");
+        try {
+          const response = await fetch("/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ actualURL, shortCode }),
+          });
+          if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(errorMessage);
+          } else {
+            ev.target.reset();
+
+            const textStream = response.body.pipeThrough(
+              new TextDecoderStream(),
+            );
+            let chunks = "";
+            for await (const textChunk of textStream) {
+              chunks += textChunk;
+            }
+            const parsedResponse = JSON.parse(chunks);
+            const { url, shortenedURL, qrCodeImageURL } =
+              parsedResponse["shortCodeWithURL"];
+
+            // create a new list item and insert the actual URL, the short URL, and the QR code for that URL, into it
+            const div = document.createElement("div");
+
+            // para for QR code image
+            const p1 = document.createElement("p");
+            const img = document.createElement("img");
+            img.setAttribute("src", qrCodeImageURL);
+            img.setAttribute("alt", "");
+            p1.appendChild(img);
+
+            // para for short URL link
+            const p2 = document.createElement("p");
+            const a = document.createElement("a");
+            a.setAttribute("href", url);
+            a.textContent = shortenedURL;
+            p2.appendChild(a);
+
+            // para for main URL
+            const p3 = document.createElement("p");
+            p3.textContent = url.length > 100 ? url.slice(0, 101) + "..." : url;
+
+            div.appendChild(p1);
+            div.appendChild(p2);
+            div.appendChild(p3);
+
+            shortenedURLList.appendChild(div);
+            alert(parsedResponse.message);
+          }
+        } catch (err) {
+          console.error(err);
+          alert("*unable to submit the form, error:", err.message);
+        }
+      });
+    </script>
+  </body>
+</html>
