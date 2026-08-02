@@ -82,3 +82,35 @@
   width: 120px;
   height: 120px;
 }
+
+@media screen and (max-width: 532px) {
+  .heading {
+    font-size: 2rem;
+  }
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .add-url form .form-group .form-label {
+    font-size: 1rem;
+  }
+  .add-url form .form-group .form-control {
+    padding: 0.4rem 1rem;
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+  }
+  .display-url .url-list .url {
+    text-align: justify;
+    font-size: 0.9rem;
+  }
+  .display-url .url-list .url img {
+    width: 100px;
+    height: 100px;
+  }
+  .add-url form .form-group .add-url-btn {
+    padding: 0.9rem 0;
+    font-size: 1rem;
+  }
+}
