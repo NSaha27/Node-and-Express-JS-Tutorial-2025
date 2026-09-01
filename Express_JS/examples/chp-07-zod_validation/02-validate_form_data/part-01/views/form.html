@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="">
+      <h1>User Registration</h1>
+      <div class="">
+        <form action="/" method="post" id="userform">
+          <div class="">
+            <label for="username">Username</label
+            ><input type="text" name="username" id="username" class="" />
+          </div>
+          <div class="">
+            <label for="name">Name</label
+            ><input type="text" name="name" id="name" class="" />
+          </div>
+          <div class="">
+            <label for="address">Address</label
+            ><textarea
+              name="address"
+              id="address"
+              class=""
+              rows="8"
+              cols="30"
+            ></textarea>
+          </div>
+          <div class="">
+            <label for="phone">Phone</label
+            ><input type="text" name="phone" id="phone" class="" />
+          </div>
+          <div class="">
+            <label for="email">Email</label
+            ><input type="email" name="email" id="email" class="" />
+          </div>
+          <div class="">
+            <label for="password">Password</label
+            ><input type="password" name="password" id="password" class="" />
+          </div>
+          <div class="">
+            <label for="confirmpassword">Confirm Password</label
+            ><input
+              type="password"
+              name="confirmpassword"
+              id="confirmpassword"
+              class=""
+            />
+          </div>
+          <div class=""><button type="submit" class="">Register</button></div>
+        </form>
+      </div>
+    </main>
+
+    <script>
+      const formEl = document.querySelector("#userform");
+      formEl.addEventListener("submit", async (ev) => {
+        ev.preventDefault();
+
+        const formData = new FormData(ev.target);
+
+        const username = formData.get("username");
+        const name = formData.get("name");
+        const address = formData.get("address");
+        const phone = formData.get("phone");
+        const email = formData.get("email");
+        const password = formData.get("password");
+        const confirmPassword = formData.get("confirmpassword");
+
+        if (password !== confirmPassword) {
+          alert("Confirm Password must be same as Password!");
+          return formEl.target("confirmpassword").focus();
+        }
+
+        const APIEndPoint = "/register-user";
+        try {
+          const response = await fetch(APIEndPoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              username,
+              name,
+              address,
+              phone,
+              email,
+              password,
+            }),
+          });
+          if (!response.ok) {
+            const error = await response.text();
+            if (error) {
+              throw new Error(error);
+            }
+          }
+          const { message, status } = await response.json();
+          if (message) {
+            alert(message);
+            formEl.reset();
+          }
+        } catch (err) {
+          alert("Unable to submit the form, error:", err.message);
+          formEl.reset();
+        }
+      });
+    </script>
+  </body>
+</html>
