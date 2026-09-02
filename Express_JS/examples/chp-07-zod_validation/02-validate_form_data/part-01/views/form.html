@@ -3,22 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style" />
     <title>Document</title>
   </head>
   <body>
-    <main class="">
-      <h1>User Registration</h1>
-      <div class="">
+    <main class="main">
+      <h1 class="title">User Registration</h1>
+      <div class="form-container">
         <form action="/" method="post" id="userform">
-          <div class="">
+          <div class="form-group">
             <label for="username">Username</label
             ><input type="text" name="username" id="username" class="" />
           </div>
-          <div class="">
+          <div class="form-group">
             <label for="name">Name</label
             ><input type="text" name="name" id="name" class="" />
           </div>
-          <div class="">
+          <div class="form-group">
             <label for="address">Address</label
             ><textarea
               name="address"
@@ -28,19 +29,19 @@
               cols="30"
             ></textarea>
           </div>
-          <div class="">
+          <div class="form-group">
             <label for="phone">Phone</label
             ><input type="text" name="phone" id="phone" class="" />
           </div>
-          <div class="">
+          <div class="form-group">
             <label for="email">Email</label
             ><input type="email" name="email" id="email" class="" />
           </div>
-          <div class="">
+          <div class="form-group">
             <label for="password">Password</label
             ><input type="password" name="password" id="password" class="" />
           </div>
-          <div class="">
+          <div class="form-group">
             <label for="confirmpassword">Confirm Password</label
             ><input
               type="password"
@@ -49,7 +50,9 @@
               class=""
             />
           </div>
-          <div class=""><button type="submit" class="">Register</button></div>
+          <div class="form-group">
+            <button type="submit" class="">Register</button>
+          </div>
         </form>
       </div>
     </main>

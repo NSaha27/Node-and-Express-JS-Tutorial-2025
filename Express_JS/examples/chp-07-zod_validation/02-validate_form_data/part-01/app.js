@@ -93,6 +93,21 @@ app.post("/register-user", async (req, res) => {
   }
 });
 
+app.get("/css/style", async (req, res) => {
+  const fileName = "style.css";
+  const filePath = path.resolve("views", fileName);
+  try{
+    const pageContent = await fs.readFile(filePath, "utf-8");
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "text/css");
+    return res.send(pageContent);
+  }catch(err){
+    res.statusCode = 500;
+    res.setHeader("Content-Type", "application/json");
+    return res.send(JSON.stringify({message: "No such file exists!", status: false, error: err.message}));
+  }
+})
+
 app.get("/", async (req, res) => {
   const fileName = "form.html";
   const filePath = path.resolve("views", fileName);
