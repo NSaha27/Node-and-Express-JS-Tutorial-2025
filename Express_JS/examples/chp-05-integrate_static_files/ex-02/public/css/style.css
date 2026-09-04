@@ -1,0 +1,16 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+header {
+  width: 100%;
+  padding: 3rem 0;
+}
+header h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #272727;
+}
