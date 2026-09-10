@@ -245,3 +245,16 @@ Request Object \-
 If a client sends a request to the server, it goes to the server in the form of an object. This object contains all the request related information, like \- requested URL, request Method, request Headers, Information about the connection (like \- HOST, PORT etc.) etc.
 
 Three main properties of the request object that will be required for any project are \- request.url, request.method, and request.headers etc.
+
+**Important Status Codes**
+
+200 → OK
+201 → Created
+204 → No Content
+
+400 → Bad Request
+401 → Unauthorized
+403 → Forbidden
+404 → Not Found
+
+500 → Internal Server Error
