@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h2>Handle Form in Express JS</h2>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="/user/registration">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div id="container">
+        <h1>User Login</h1>
+        <div>
+          <form action="/user/login" method="post">
+            <div>
+              <label for="username">Username</label><br /><input
+                type="text"
+                name="username"
+                id="username"
+              />
+            </div>
+            <div>
+              <label for="password">Password</label><br /><input
+                type="password"
+                name="password"
+                id="password"
+              />
+            </div>
+            <div>
+              <button type="submit">Login</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <p>OR</p>
+          <p>
+            not yet registered? register <a href="/user/registration">here</a>
+          </p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

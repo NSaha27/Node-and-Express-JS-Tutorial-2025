@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h2>Handle Form in Express JS</h2>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="/user/login">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div id="container">
+        <h1>User Registration</h1>
+        <div>
+          <form action="/user/registration" method="post">
+            <div>
+              <label for="username">Username</label><br /><input
+                type="text"
+                name="user[username]"
+                id="username"
+              />
+            </div>
+            <div>
+              <label for="name">Name</label><br /><input
+                type="text"
+                name="user[name]"
+                id="name"
+              />
+            </div>
+            <div>
+              <label for="">Gender</label><br />
+              <span>
+                <input
+                  type="radio"
+                  name="user[gender]"
+                  id="male"
+                  value="male"
+                />
+                <label for="male">Male</label>
+              </span>
+              <span>
+                <input
+                  type="radio"
+                  name="user[gender]"
+                  id="female"
+                  value="female"
+                />
+                <label for="female">Female</label>
+              </span>
+              <span>
+                <input
+                  type="radio"
+                  name="user[gender]"
+                  id="other"
+                  value="other"
+                />
+                <label for="other">Other</label>
+              </span>
+            </div>
+            <div>
+              <label for="address">Address</label><br /><textarea
+                name="user[address]"
+                id="address"
+                rows="8"
+              ></textarea>
+            </div>
+            <div>
+              <label for="phone">Phone</label><br /><input
+                type="text"
+                name="user[phone]"
+                id="phone"
+              />
+            </div>
+            <div>
+              <label for="email">Email</label><br /><input
+                type="email"
+                name="user[email]"
+                id="email"
+              />
+            </div>
+            <div>
+              <label for="password">Password</label><br /><input
+                type="password"
+                name="user[password]"
+                id="password"
+              />
+            </div>
+            <div>
+              <label for="confirmpassword">Confirm Password</label><br /><input
+                type="password"
+                name="user[confirmpassword]"
+                id="confirmpassword"
+              />
+            </div>
+            <div>
+              <button type="submit">Register</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <p>OR</p>
+          <p>already registered? login <a href="/user/login">here</a></p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
