@@ -5,11 +5,8 @@ import path from "node:path/posix";
 import express from "express";
 import session from "express-session";
 
-// user modules
-import { handleLogin, loadLoginPage } from "./controller/handleLogin.js";
-import handleLogout from "./controller/handleLogout.js";
-import { handleRegistration, loadRegistrationPage } from "./controller/handleRegistration.js";
-import loadUserHomePage from "./controller/handleUserHome.js";
+import handleNotFound from "./controller/handleNotFound.js";
+import userRouter from "./routes/user.router.js";
 
 // express application instance
 const app = express();
@@ -29,15 +26,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.resolve("public")));
 
 // routes
-const userRouter = express.Router();
 app.use("/user", userRouter);
-
-userRouter.get("/registration", loadRegistrationPage);
-userRouter.post("/registration", handleRegistration);
-userRouter.get("/login", loadLoginPage);
-userRouter.post("/login", handleLogin);
-userRouter.get("/user-home", loadUserHomePage);
-userRouter.get("/logout", handleLogout);
+app.use(handleNotFound);
 
 // server-connection
 const PORT = process.env.PORT || 8080;
