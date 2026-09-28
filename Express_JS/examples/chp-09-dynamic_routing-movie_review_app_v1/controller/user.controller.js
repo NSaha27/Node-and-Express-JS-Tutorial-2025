@@ -5,16 +5,23 @@ import path from "node:path/posix";
 
 import User from "../model/user.model.js";
 
-const loadSignupPage = async(req, res) => {
-  const fileName = "signup.html";
-  const filePath = path.resolve("view", "user", fileName);
-  try{
-    const fileContent = await fs.readFile(filePath, "utf8");
-    return res.status(200).send(fileContent);
-  }catch(err){
-    console.error(err.message);
-    return res.status(404).redirect("/404");
-  }
+const loadSignupPage = (req, res) => {
+  const token = req.session.jwt_token || "";
+  jwt.verify(token, process.env.JWT_SECRET_KEY, {algorithms: ["HS256"]}, async(err, payload) => {
+    if(err){
+      const fileName = "signup.html";
+      const filePath = path.resolve("views", "user", fileName);
+      try{
+        const fileContent = await fs.readFile(filePath, "utf8");
+        return res.status(200).send(fileContent);
+      }catch(err){
+        console.error(err.message);
+        return res.status(404).redirect("/404");
+      }
+    }else{
+      res.status(200).redirect("/user/dashboard");
+    }
+  })
 };
 
 const handleSignup = async(req, res) => {
@@ -47,16 +54,23 @@ const handleSignup = async(req, res) => {
   }
 };
 
-const loadLoginPage = async(req, res) => {
-  const fileName = "login.html";
-  const filePath = path.resolve("view", "user", fileName);
-  try {
-    const fileContent = await fs.readFile(filePath, "utf8");
-    return res.status(200).send(fileContent);
-  } catch (err) {
-    console.error(err.message);
-    return res.status(404).redirect("/404");
-  }
+const loadLoginPage = (req, res) => {
+  const token = req.session.jwt_token || "";
+  jwt.verify(token, process.env.JWT_SECRET_KEY, {algorithms: ["HS256"]}, async(err, payload) => {
+    if(err){
+      const fileName = "login.html";
+      const filePath = path.resolve("views", "user", fileName);
+      try {
+        const fileContent = await fs.readFile(filePath, "utf8");
+        return res.status(200).send(fileContent);
+      } catch (err) {
+        console.error(err.message);
+        return res.status(404).redirect("/404");
+      }
+    }else{
+      res.status(200).redirect("/user/dashboard");
+    }
+  })
 };
 
 const handleLogin = async(req, res) => {
@@ -82,7 +96,7 @@ const handleLogin = async(req, res) => {
       return res.status(500).json({error: err.message});
     }
     req.session.jwt_token = token;
-    return res.status(302).redirect("/dashboard");
+    return res.status(302).redirect("/user/dashboard");
   });
 };
 
@@ -94,7 +108,7 @@ const loadUserDashboard = (req, res) => {
       return res.status(401).redirect("/login");
     }
     const fileName = "dashboard.html";
-    const filePath = path.resolve("view", "user", fileName);
+    const filePath = path.resolve("views", "user", fileName);
     try{
       const fileContent = await fs.readFile(filePath, "utf8");
       const updatedContent = fileContent.toString().replace("{{ID}}", payload.id);

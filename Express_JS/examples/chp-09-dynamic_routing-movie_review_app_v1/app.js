@@ -3,6 +3,9 @@ import path from "node:path/posix";
 
 import session from "express-session";
 
+import adminRouter from "./routes/admin.router.js";
+import userRouter from "./routes/user.router.js";
+
 const app = express();
 
 // middlewares
@@ -17,6 +20,9 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.resolve("public")));
+
+app.use("/user", userRouter);
+app.use(adminRouter);
 
 const PORT = process.env.PORT || 8080;
 const HOST = process.env.HOST || "localhost";

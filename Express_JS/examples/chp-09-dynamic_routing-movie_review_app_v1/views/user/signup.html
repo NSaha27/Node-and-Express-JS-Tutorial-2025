@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Sign Up</title>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <h2 class="logo">Movie Review App</h2>
+        <ul class="menu">
+          <li class="menu-item"><a href="/" class="menu-link">Home</a></li>
+          <li class="menu-item">
+            <a href="/movies" class="menu-link">Movies</a>
+          </li>
+          <li class="menu-item">
+            <a href="#" class="menu-link">Contact Us</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+      <h1 class="page-title">Welcome to user signup page!</h1>
+      <p class="">*fill up the following:</p>
+      <div class="form-container">
+        <form action="/user/signup" method="post">
+          <div class="form-group">
+            <label for="id" class="form-label">ID</label><br /><input
+              type="text"
+              name="id"
+              id="id"
+              class="form-control"
+              placeholder="Enter user ID"
+            />
+          </div>
+          <div class="form-group">
+            <label for="name" class="form-label">Name</label><br /><input
+              type="text"
+              name="name"
+              id="name"
+              class="form-control"
+              placeholder="Enter user name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone</label><br /><input
+              type="text"
+              name="phone"
+              id="phone"
+              class="form-control"
+              placeholder="Enter phone number"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label><br /><input
+              type="email"
+              name="email"
+              id="email"
+              class="form-control"
+              placeholder="Enter email ID"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label
+            ><br /><input
+              type="password"
+              name="password"
+              id="password"
+              class="form-control"
+              placeholder="Enter password"
+            />
+          </div>
+          <div class="form-group">
+            <label for="confirmpassword" class="form-label"
+              >Confirm Password</label
+            ><br /><input
+              type="password"
+              name="confirmpassword"
+              id="confirmpassword"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn-success">Sign Up</button>
+          </div>
+        </form>
+      </div>
+      <div class="">
+        <p>OR</p>
+        <p>already registered? login <a href="/user/login">here</a></p>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="">
+        <p class="">&copy; www.moviereview.xyz, 2026</p>
+      </div>
+    </footer>
+  </body>
+</html>
