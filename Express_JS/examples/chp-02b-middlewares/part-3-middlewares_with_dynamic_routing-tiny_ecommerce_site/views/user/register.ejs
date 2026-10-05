@@ -1,19 +1,4 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tiny Ecommerce</title>
-    <link rel="stylesheet" href="/css/style.css" />
-  </head>
-  <body>
-    <header>
-      <nav>
-        <div class="logo">
-          <h2><a href="/">Tiny-Ecommerce</a></h2>
-        </div>
-        <ul class="menu">
-          <li><a href="/">Home</a></li>
+<%- include("../header.ejs") %>
           <li>
             <a href="#">Products ▾</a>
             <ul class="dropdown">
@@ -50,6 +35,4 @@
         <p>OR</p>
         <p>already registered? Login <a href="/user/login">here</a></p>
       </div>
-    </main>
-  </body>
-</html>
+    <%- include("../footer.ejs") %>
