@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tiny Ecommerce</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <h2><a href="/">Tiny-Ecommerce</a></h2>
+        </div>
+        <ul class="menu">
+          <li><a href="/">Home</a></li>
+          <li><a href="/admin/account">Account</a></li>
+          <li><a href="/admin/register">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <% if(message){ %>
+          <div class="message"><%= message %></div>
+      <% } %>
+      <h1>Admin Login</h1>
+      <div>
+        <form action="/admin/login" method="post">
+          <div><label for="id">Admin ID</label><br><input type="text" name="id" id="id"></div>
+          <div><label for="password">Password</label><br><input type="password" name="password" id="password"></div>
+          <div><button type="submit">Login</button></div>
+        </form>
+        <p>OR</p>
+        <p>not yet registered? Register <a href="/admin/register">here</a></p>
+      </div>
+    </main>
+  </body>
+</html>

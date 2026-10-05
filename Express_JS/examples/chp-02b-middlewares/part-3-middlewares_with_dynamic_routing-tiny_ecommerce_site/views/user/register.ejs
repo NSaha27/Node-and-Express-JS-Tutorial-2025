@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tiny Ecommerce</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <h2><a href="/">Tiny-Ecommerce</a></h2>
+        </div>
+        <ul class="menu">
+          <li><a href="/">Home</a></li>
+          <li>
+            <a href="#">Products ▾</a>
+            <ul class="dropdown">
+              <li><a href="/products/men">Men</a></li>
+              <li><a href="/products/women">Women</a></li>
+              <li><a href="/products/kids">Kids</a></li>
+            </ul>
+          </li>
+          <li><a href="/user/account">Account</a></li>
+          <li><a href="/user/login">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <% if(message){ %>
+          <div class="message"><%= message %></div>
+      <% } %>
+      <h1>User Registration</h1>
+      <div>
+        <form action="/user/register" method="post">
+          <div><label for="id">User ID</label><br><input type="text" name="id" id="id"></div>
+          <div><label for="name">Name</label><br><input type="text" name="name" id="name"></div>
+          <div>
+            <label for="gender">Gender</label>
+            <div><span><input type="radio" name="gender" id="male" value="male"> <label for="male"></label>Male</span><span><input type="radio" name="gender" id="female" value="female"><label for="female">Female</label></span><span><input type="radio" name="gender" id="other" value="other"><label for="other">Other</label></span></div>
+          </div>
+          <div><label for="address">Address</label><br><textarea name="address" id="address" rows="10" cols="24"></textarea></div>
+          <div><label for="phone">Phone</label><br><input type="text" name="phone" id="phone"></div>
+          <div><label for="email">Email ID</label><br><input type="email" name="email" id="email"></div>
+          <div><label for="password">Password</label><br><input type="password" name="password" id="password"></div>
+          <div><label for="confirmpassword">Confirm Password</label><br><input type="password" name="confirmpassword" id="confirmpassword"></div>
+          <div><button type="submit">Register</button></div>
+        </form>
+        <p>OR</p>
+        <p>already registered? Login <a href="/user/login">here</a></p>
+      </div>
+    </main>
+  </body>
+</html>
