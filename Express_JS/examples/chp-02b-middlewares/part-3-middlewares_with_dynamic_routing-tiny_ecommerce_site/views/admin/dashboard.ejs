@@ -1,1 +1,15 @@
 <%- include("../header.ejs") %>
+            <li><a href="/admin/products">Products</a></li>
+            <li><a href="/admin/account">Account</a></li> 
+          </ul>
+      </nav>
+    </header>
+    <main>
+      <% if(message){ %>
+          <div class="message"><%= message %></div>
+      <% } %>
+      <h1>Admin Dashboard</h1>
+      <div>
+        
+      </div>
+    <%- include("../footer.ejs") %>

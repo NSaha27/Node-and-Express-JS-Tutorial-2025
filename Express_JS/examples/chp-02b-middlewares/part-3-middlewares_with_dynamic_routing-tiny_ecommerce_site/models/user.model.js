@@ -31,7 +31,7 @@ class User{
     users.push({id: this.id, name: this.name, gender: this.gender, address: this.address, phone: this.phone, email: this.email, password: encryptedPsw});
     try{
       await fs.writeFile(filePath, JSON.stringify(users), "utf8");
-      return {message: "Success! user registered!"};
+      return {message: "Success! user registered"};
     }catch(err){
       return new Error("Unable to register the user, error:", err.message);
     }
