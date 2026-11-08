@@ -1,0 +1,35 @@
+<%- include("../header.ejs") %>
+            <li><a href="/admin/products">Products</a></li>
+            <li><a href="/admin/account">Account</a></li> 
+            <li><a href="/admin/logout">Log Out</a></li>
+          </ul>
+      </nav>
+    </header>
+    <main>
+      <% if(message){ %>
+          <div class="message"><%= message %></div>
+      <% } %>
+      <div class="">
+        <h1>Add Product</h1>
+        <div class="">
+          <form action="/admin/add-product" method="post">
+            <input type="hidden" name="username" value="<%= username %>">
+            <div class=""><label for="name">Name</label><br><input type="text" name="name" id="name" placeholder="enter product name"></div>
+            <div class=""><label for="category">Category</label><br><select name="category" id="category">
+              <option value="" selected disabled>Select an option</option>
+              <option value="kurti">Kurti</option>
+              <option value="saree">Saree</option>
+              <option value="lagings">Lagings</option>
+              <option value="jeans">Jeans</option>
+              <option value="shirt">Shirt</option>
+              <option value="t-shirt">T-shirt</option>
+              <option value="inner wears">Inner wears</option>
+            </select></div>
+            <div class=""><label for="description">Description</label><br><textarea name="description" id="description" cols="25" rows="8" placeholder="enter product description"></textarea></div>
+            <div class=""><label for="price">Price</label><br><input type="number" name="price" id="price" step="0.00" placeholder="enter product price"></div>
+            <div class=""><label for="image">Image</label><br><input type="text" name="image" id="image" placeholder="enter image file name with extension"></div>
+            <div class=""><button type="submit" class="">Add</button></div>
+          </form>
+        </div>
+      </div>
+    <%- include("../footer.ejs") %>

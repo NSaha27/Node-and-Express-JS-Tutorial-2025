@@ -1,0 +1,44 @@
+<%- include("../header.ejs") %>
+          <li>
+            <a href="#">Products ▾</a>
+            <ul class="dropdown">
+              <li><a href="/products/men">Men</a></li>
+              <li><a href="/products/women">Women</a></li>
+              <li><a href="/products/kids">Kids</a></li>
+            </ul>
+          </li>
+          <li><a href="/user/account">Account</a></li>
+          <li><a href="/user/cart">Cart</a></li>
+          <li><a href="/user/logout">Log Out</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <% if(message){ %>
+          <div class="message"><%= message %></div>
+      <% } %>
+      <h1>Our Products</h1>
+      <div class="">
+        <% if(products.length > 0){ %>
+          <% products.forEach((product, index, arr) => { %>
+            <div class="card">
+              <div class="card-header">
+                <img src="/images/<%= product.image %>" alt="<%= product.name %>">
+              </div>
+              <div class="card-body">
+                <h2><%= product.name %></h2>
+                <h4><%= product.category %></h4>
+                <p><%= product.description %></p>
+                <h4><% product.qty > 0 ? "In stock" : "Out of stock" %></h4>
+                <h3>Rs.<%= product.price %> only</h3>
+              </div>
+              <div class="card-footer">
+                <a href="/user/add-to-cart?ID=<%= encodeURIComponent(product._id.toHexString()) %>" class="btn">Add to Cart</a><a href="/product/get-details?ID=<%= encodeURIComponent(product._id.toHexString()) %>" class="btn">Details</a>
+              </div>
+            </div>
+          <% }) %>
+        <% }else{ %>
+          <h3 class="">No product is yet added!</h3>
+        <% } %>
+      </div>
+    <%- include("../footer.ejs") %>

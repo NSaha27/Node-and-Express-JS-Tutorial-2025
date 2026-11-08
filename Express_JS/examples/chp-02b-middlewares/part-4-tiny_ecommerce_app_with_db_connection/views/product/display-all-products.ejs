@@ -1,0 +1,38 @@
+<%- include("../header.ejs") %>
+            <li><a href="/admin/add-product">Add Product</a></li>
+            <li><a href="/admin/account">Account</a></li> 
+            <li><a href="/admin/logout">Log Out</a></li>
+          </ul>
+      </nav>
+    </header>
+    <main>
+      <% if(message){ %>
+          <div class="message"><%= message %></div>
+      <% } %>
+      <div class="">
+        <h1 class="">Products</h1>
+        <div class="">
+          <% if(products.length === 0) { %>
+            <p>No product is yet available!</p>  
+          <% } else { %>
+            <% products.forEach((product, index, arr) => { %>
+              <div class="card">
+                <div class="card-header">
+                  <img src="/images/<%= product.image %>" alt="" class="">
+                </div>
+                <div class="card-body">
+                  <h2><%= product.name %></h2>
+                  <h4><%= product.category %></h4>
+                  <p><%= product.description %></p>
+                  <h3>Rs.<%= product.price %> only</h3>
+                </div>
+                <div class="card-footer">
+                  <a href="/admin/edit-product?ID=<%= encodeURIComponent(product._id.toHexString()) %>">Edit</a>
+                  <a href="/admin/delete-product?ID=<%= encodeURIComponent(product._id.toHexString()) %>">Delete</a>
+                </div>
+              </div>  
+            <% }) %>
+          <% } %>
+        </div>
+      </div>
+    <%- include("../footer.ejs") %>

@@ -1,0 +1,29 @@
+<%- include("../header.ejs") %>
+          <li>
+            <a href="#">Products ▾</a>
+            <ul class="dropdown">
+              <li><a href="/products/men">Men</a></li>
+              <li><a href="/products/women">Women</a></li>
+              <li><a href="/products/kids">Kids</a></li>
+            </ul>
+          </li>
+          <li><a href="/user/account">Account</a></li>
+          <li><a href="/user/register">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <% if(message){ %>
+          <div class="message"><%= message %></div>
+      <% } %>
+      <h1>User Login</h1>
+      <div>
+        <form action="/user/login" method="post">
+          <div><label for="username">Username</label><br><input type="text" name="username" id="username"></div>
+          <div><label for="password">Password</label><br><input type="password" name="password" id="password"></div>
+          <div><button type="submit">Login</button></div>
+        </form>
+        <p>OR</p>
+        <p>not yet registered? Register <a href="/user/register">here</a></p>
+      </div>
+    <%- include("../footer.ejs") %>
